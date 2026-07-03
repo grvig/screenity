@@ -6,7 +6,7 @@ import {
   Output,
   BufferTarget,
   Mp4OutputFormat,
-  QUALITY_HIGH,
+  QUALITY_VERY_HIGH,
   VideoSampleSource,
   AudioSampleSource,
   VideoSampleSink,
@@ -34,9 +34,12 @@ export class VideoCutter {
 
     const codecInfo = await videoConverter.detectBestCodec("mp4");
     const videoCodec = codecInfo?.codec ?? "avc";
+    // interior cuts must re-encode across the removed segment, so bump to
+    // QUALITY_VERY_HIGH (vs. the QUALITY_HIGH used elsewhere) to keep the
+    // re-encoded seam close to source quality and avoid a visible blur step
     const videoSource = new VideoSampleSource({
       codec: videoCodec,
-      bitrate: QUALITY_HIGH,
+      bitrate: QUALITY_VERY_HIGH,
       sizeChangeBehavior: "passThrough",
     });
     output.addVideoTrack(videoSource);
@@ -45,7 +48,7 @@ export class VideoCutter {
     if (audioTrack) {
       audioSource = new AudioSampleSource({
         codec: "aac",
-        bitrate: QUALITY_HIGH,
+        bitrate: QUALITY_VERY_HIGH,
       });
       output.addAudioTrack(audioSource);
     }

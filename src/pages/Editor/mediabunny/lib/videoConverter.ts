@@ -8,14 +8,16 @@ import {
   WebMOutputFormat,
   ALL_FORMATS,
   Conversion,
+  QUALITY_HIGH,
   type VideoCodec,
   type AudioCodec,
+  type Quality,
 } from "mediabunny";
 
 export type SupportedFormat = "mp4" | "webm";
 
 export interface ConversionOptions {
-  videoBitrate?: number;
+  videoBitrate?: number | Quality;
   audioBitrate?: number;
   preferredVideoCodec?: VideoCodec;
   audioCodec?: AudioCodec;
@@ -96,7 +98,9 @@ export class VideoConverter {
     options: ConversionOptions
   ): Promise<Blob> {
     const {
-      videoBitrate = 5_000_000,
+      // resolution-scaled instead of a flat number, so re-encoding a 4K
+      // recording doesn't get squashed to the same bitrate as a 720p one
+      videoBitrate = QUALITY_HIGH,
       audioBitrate = 128_000,
       preferredVideoCodec,
       audioCodec,

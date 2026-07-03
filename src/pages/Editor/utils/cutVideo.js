@@ -32,23 +32,22 @@ export default async function cutVideo(
       onProgress,
     });
   } else if (cut) {
+    // VideoCutter re-encodes (interior cut); it picks its own resolution-scaled
+    // bitrate internally (see videoCutter.ts), these two options are unused
     const cutter = new VideoCutter();
     result = await cutter.cut(videoBlob, {
       cutStart: startTime,
       cutEnd: endTime,
       outputFormat: "mp4",
-      videoBitrate: 5_000_000,
-      audioBitrate: 128_000,
       onProgress,
     });
   } else {
+    // VideoTrimmer stream-copies the encoded packets, no re-encode happens
     const trimmer = new VideoTrimmer();
     result = await trimmer.trim(videoBlob, {
       startTime,
       endTime,
       outputFormat: "mp4",
-      videoBitrate: 5_000_000,
-      audioBitrate: 128_000,
       onProgress,
     });
   }
