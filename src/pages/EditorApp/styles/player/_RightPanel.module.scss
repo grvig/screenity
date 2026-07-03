@@ -130,6 +130,21 @@
     margin-top: 4px;
   }
 }
+.gifQualitySlider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+
+  input[type="range"] {
+    flex: 1;
+  }
+}
+.gifQualitySliderLabel {
+  font-family: $font-medium;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
 .inputSection {
   padding-top: 4px;
   padding-bottom: 4px;

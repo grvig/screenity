@@ -672,17 +672,21 @@
       }
     }
   },
-  "gifResolutionLabel": {
-    "message": "GIF output width",
-    "description": "Tooltip for the GIF export resolution dropdown"
-  },
-  "gifFpsLabel": {
-    "message": "GIF frame rate",
-    "description": "Tooltip for the GIF export FPS dropdown"
-  },
   "gifQualityLabel": {
     "message": "GIF quality",
-    "description": "Tooltip for the GIF export quality dropdown"
+    "description": "Tooltip for the GIF export quality slider"
+  },
+  "gifQualitySmall": {
+    "message": "Small",
+    "description": "GIF quality slider preset: lowest resolution/fps/quality, smallest file"
+  },
+  "gifQualityBalanced": {
+    "message": "Balanced",
+    "description": "GIF quality slider preset: middle ground, default"
+  },
+  "gifQualityBest": {
+    "message": "Best",
+    "description": "GIF quality slider preset: highest resolution/fps/quality, largest file"
   },
   "audioSilentToast": {
     "message": "No audio detected. Check your mic, mute switch, or audio device.",

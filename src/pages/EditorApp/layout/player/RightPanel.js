@@ -12,20 +12,14 @@ import CropUI from "../editor/CropUI";
 import AudioUI from "../editor/AudioUI";
 
 import { ContentStateContext } from "../../context/ContentState";
-import {
-  estimateGifSizeBytes,
-  GIF_WIDTH,
-  GIF_FPS,
-  GIF_QUALITY,
-} from "../../../Editor/utils/toGIF";
+import { estimateGifSizeBytes, GIF_QUALITY } from "../../../Editor/utils/toGIF";
 
-const GIF_WIDTH_OPTIONS = [360, 480, 540, 720, 1080];
-const GIF_FPS_OPTIONS = [6, 10, 12, 15, 20, 24];
-// gif.js "quality" is a color-sampling interval: lower = better/slower.
-const GIF_QUALITY_OPTIONS = [
-  { label: "High", value: 3 },
-  { label: "Medium", value: GIF_QUALITY },
-  { label: "Low", value: 15 },
+// Single slider replaces separate width/fps/quality dropdowns: one control,
+// low to high, instead of a multi-panel options screen.
+const GIF_QUALITY_PRESETS = [
+  { labelKey: "gifQualitySmall", width: 360, fps: 10, quality: 15 },
+  { labelKey: "gifQualityBalanced", width: 540, fps: 12, quality: GIF_QUALITY },
+  { labelKey: "gifQualityBest", width: 720, fps: 15, quality: 3 },
 ];
 
 const RightPanel = () => {
@@ -43,9 +37,8 @@ const RightPanel = () => {
     contentStateRef.current = contentState;
   }, [contentState]);
 
-  const [gifWidth, setGifWidth] = useState(GIF_WIDTH);
-  const [gifFps, setGifFps] = useState(GIF_FPS);
-  const [gifQuality, setGifQuality] = useState(GIF_QUALITY);
+  const [gifPresetIndex, setGifPresetIndex] = useState(1); // "Balanced"
+  const gifPreset = GIF_QUALITY_PRESETS[gifPresetIndex];
 
   const getNotAvailableLabel = () => {
     if (contentState.fallback && contentState.noffmpeg && contentState.editLimit === 0) {
@@ -83,7 +76,7 @@ const RightPanel = () => {
       contentState.duration,
       contentState.width,
       contentState.height,
-      { width: gifWidth, fps: gifFps, quality: gifQuality }
+      gifPreset
     );
     if (estimatedBytes < GIF_SIZE_WARNING_THRESHOLD_BYTES) {
       return null;
@@ -1000,11 +993,7 @@ const RightPanel = () => {
                   ) {
                     return;
                   }
-                  contentState.downloadGIF({
-                    width: gifWidth,
-                    fps: gifFps,
-                    quality: gifQuality,
-                  });
+                  contentState.downloadGIF(gifPreset);
                 }}
                 disabled={
                   contentState.downloadingGIF ||
@@ -1039,40 +1028,19 @@ const RightPanel = () => {
                   <ReactSVG src={URL + "editor/icons/right-arrow.svg"} />
                 </div>
               </div>
-              <div style={{ display: "flex", gap: 8, padding: "8px 4px" }}>
-                <select
-                  value={gifWidth}
-                  onChange={(e) => setGifWidth(Number(e.target.value))}
-                  title={chrome.i18n.getMessage("gifResolutionLabel")}
-                >
-                  {GIF_WIDTH_OPTIONS.map((w) => (
-                    <option key={w} value={w}>
-                      {w}p
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={gifFps}
-                  onChange={(e) => setGifFps(Number(e.target.value))}
-                  title={chrome.i18n.getMessage("gifFpsLabel")}
-                >
-                  {GIF_FPS_OPTIONS.map((f) => (
-                    <option key={f} value={f}>
-                      {f} fps
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={gifQuality}
-                  onChange={(e) => setGifQuality(Number(e.target.value))}
+              <div className={styles.gifQualitySlider}>
+                <div className={styles.gifQualitySliderLabel}>
+                  {chrome.i18n.getMessage(gifPreset.labelKey)}
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={GIF_QUALITY_PRESETS.length - 1}
+                  step={1}
+                  value={gifPresetIndex}
+                  onChange={(e) => setGifPresetIndex(Number(e.target.value))}
                   title={chrome.i18n.getMessage("gifQualityLabel")}
-                >
-                  {GIF_QUALITY_OPTIONS.map((q) => (
-                    <option key={q.value} value={q.value}>
-                      {q.label}
-                    </option>
-                  ))}
-                </select>
+                />
               </div>
             </div>
           </div>
