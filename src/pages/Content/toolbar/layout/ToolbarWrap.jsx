@@ -551,92 +551,100 @@ const ToolbarWrap = () => {
             value={mode}
             onValueChange={handleChange}
           >
-            <div className="ToolbarToggleWrap">
-              {contentState.showOnboardingArrow && (
-                <div className="OnboardingArrow">
-                  <div className="OnboardingText">
-                    {chrome.i18n.getMessage("clickHereDrawOnboarding")}
-                  </div>
-                  <div className="ArrowShape">
-                    <OnboardingArrow />
-                  </div>
+            {/* GIF exports are frame-converted from the recorded video and
+                never carry audio/drawing overlays cleanly, so drawing,
+                blur, cursor effects, mic, and the camera bubble are just
+                noise here; strip the toolbar down to record/stop controls */}
+            {!contentState.gifCaptureMode && (
+              <>
+                <div className="ToolbarToggleWrap">
+                  {contentState.showOnboardingArrow && (
+                    <div className="OnboardingArrow">
+                      <div className="OnboardingText">
+                        {chrome.i18n.getMessage("clickHereDrawOnboarding")}
+                      </div>
+                      <div className="ArrowShape">
+                        <OnboardingArrow />
+                      </div>
+                    </div>
+                  )}
+                  <ToolTrigger
+                    type="mode"
+                    content={chrome.i18n.getMessage("toggleDrawingToolsTooltip")}
+                    value="draw"
+                    shortcut={contentState.toggleDrawingModeShortcut}
+                    disabled={contentState.recordingType === "camera"}
+                  >
+                    {mode === "draw" && <CloseButtonToolbar />}
+                    {mode !== "draw" && <DrawIcon />}
+                  </ToolTrigger>
+                  <DrawingToolbar visible={mode === "draw" ? "show-toolbar" : ""} />
                 </div>
-              )}
-              <ToolTrigger
-                type="mode"
-                content={chrome.i18n.getMessage("toggleDrawingToolsTooltip")}
-                value="draw"
-                shortcut={contentState.toggleDrawingModeShortcut}
-                disabled={contentState.recordingType === "camera"}
-              >
-                {mode === "draw" && <CloseButtonToolbar />}
-                {mode !== "draw" && <DrawIcon />}
-              </ToolTrigger>
-              <DrawingToolbar visible={mode === "draw" ? "show-toolbar" : ""} />
-            </div>
-            <div className="ToolbarToggleWrap">
-              <ToolTrigger
-                type="mode"
-                content={chrome.i18n.getMessage("toggleBlurToolTooltip")}
-                value="blur"
-                shortcut={contentState.toggleBlurModeShortcut}
-                disabled={contentState.recordingType === "camera"}
-              >
-                {mode === "blur" && <CloseButtonToolbar />}
-                {mode !== "blur" && <BlurIcon />}
-              </ToolTrigger>
-              <BlurToolbar visible={mode === "blur" ? "show-toolbar" : ""} />
-            </div>
+                <div className="ToolbarToggleWrap">
+                  <ToolTrigger
+                    type="mode"
+                    content={chrome.i18n.getMessage("toggleBlurToolTooltip")}
+                    value="blur"
+                    shortcut={contentState.toggleBlurModeShortcut}
+                    disabled={contentState.recordingType === "camera"}
+                  >
+                    {mode === "blur" && <CloseButtonToolbar />}
+                    {mode !== "blur" && <BlurIcon />}
+                  </ToolTrigger>
+                  <BlurToolbar visible={mode === "blur" ? "show-toolbar" : ""} />
+                </div>
 
-            <div className="ToolbarToggleWrap">
-              <ToolTrigger
-                type="mode"
-                content={chrome.i18n.getMessage("toggleCursorOptionsTooltip")}
-                value="cursor"
-                shortcut={contentState.toggleCursorModeShortcut}
-                disabled={contentState.recordingType === "camera"}
-              >
-                {contentState.cursorMode === "target" && <TargetCursorIcon />}
-                {contentState.cursorMode === "highlight" && (
-                  <HighlightCursorIcon />
-                )}
-                {contentState.cursorMode === "spotlight" && (
-                  <SpotlightCursorIcon />
-                )}
-                {contentState.cursorMode === "none" && <CursorIcon />}
-              </ToolTrigger>
-              <CursorToolbar
-                visible={mode === "cursor" ? "show-toolbar" : ""}
-                mode={mode}
-                setMode={setMode}
-              />
-            </div>
-            <Toolbar.Separator className="ToolbarSeparator" />
-            <MicToggle />
-            {(!contentState.cameraActive ||
-              contentState.defaultVideoInput === "none") &&
-              (!contentState.isSubscribed || !contentState.recording) &&
-              contentState.recordingType != "camera-only" && (
-                <ToolTrigger
-                  type="button"
-                  content={
-                    contentState.cameraActive && contentState.cameraPermission
-                      ? chrome.i18n.getMessage("disableCameraTooltip")
-                      : !contentState.cameraActive &&
-                        contentState.cameraPermission
-                      ? chrome.i18n.getMessage("enableCameraTooltip")
-                      : chrome.i18n.getMessage("noCameraPermissionsTooltip")
-                  }
-                  value="camera"
-                  onClick={enableCamera}
-                  disabled={
-                    !contentState.cameraPermission ||
-                    contentState.defaultVideoInput === "none"
-                  }
-                >
-                  <CameraIcon />
-                </ToolTrigger>
-              )}
+                <div className="ToolbarToggleWrap">
+                  <ToolTrigger
+                    type="mode"
+                    content={chrome.i18n.getMessage("toggleCursorOptionsTooltip")}
+                    value="cursor"
+                    shortcut={contentState.toggleCursorModeShortcut}
+                    disabled={contentState.recordingType === "camera"}
+                  >
+                    {contentState.cursorMode === "target" && <TargetCursorIcon />}
+                    {contentState.cursorMode === "highlight" && (
+                      <HighlightCursorIcon />
+                    )}
+                    {contentState.cursorMode === "spotlight" && (
+                      <SpotlightCursorIcon />
+                    )}
+                    {contentState.cursorMode === "none" && <CursorIcon />}
+                  </ToolTrigger>
+                  <CursorToolbar
+                    visible={mode === "cursor" ? "show-toolbar" : ""}
+                    mode={mode}
+                    setMode={setMode}
+                  />
+                </div>
+                <Toolbar.Separator className="ToolbarSeparator" />
+                <MicToggle />
+                {(!contentState.cameraActive ||
+                  contentState.defaultVideoInput === "none") &&
+                  (!contentState.isSubscribed || !contentState.recording) &&
+                  contentState.recordingType != "camera-only" && (
+                    <ToolTrigger
+                      type="button"
+                      content={
+                        contentState.cameraActive && contentState.cameraPermission
+                          ? chrome.i18n.getMessage("disableCameraTooltip")
+                          : !contentState.cameraActive &&
+                            contentState.cameraPermission
+                          ? chrome.i18n.getMessage("enableCameraTooltip")
+                          : chrome.i18n.getMessage("noCameraPermissionsTooltip")
+                      }
+                      value="camera"
+                      onClick={enableCamera}
+                      disabled={
+                        !contentState.cameraPermission ||
+                        contentState.defaultVideoInput === "none"
+                      }
+                    >
+                      <CameraIcon />
+                    </ToolTrigger>
+                  )}
+              </>
+            )}
           </Toolbar.ToggleGroup>
         </Toolbar.Root>
       </Rnd>

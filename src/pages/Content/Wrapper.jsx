@@ -449,6 +449,7 @@ const Wrapper = () => {
                 !contentState.isCountdownVisible && <RecordingLoader />}
               <Countdown />
               {contentState.recordingType != "camera" &&
+                !contentState.gifCaptureMode &&
                 !contentState.onboarding &&
                 !(
                   contentState.isSubscribed === false &&
