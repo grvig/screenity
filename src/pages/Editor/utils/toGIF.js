@@ -1,5 +1,20 @@
 import GIF from "gif.js";
 
+export const GIF_WIDTH = 540;
+export const GIF_FPS = 12;
+export const GIF_QUALITY = 5;
+
+// Empirical bytes-per-pixel-per-frame for gif.js at GIF_QUALITY on typical
+// screen-recording content (mostly flat color, some text/cursor motion).
+const GIF_BYTES_PER_PIXEL_PER_FRAME = 0.045;
+
+export function estimateGifSizeBytes(duration, sourceWidth, sourceHeight) {
+  const width = GIF_WIDTH;
+  const height = Math.round((sourceHeight / sourceWidth) * width);
+  const totalFrames = Math.max(1, Math.floor(duration * GIF_FPS));
+  return width * height * totalFrames * GIF_BYTES_PER_PIXEL_PER_FRAME;
+}
+
 async function toGIF(ffmpeg, videoBlob, onProgress = () => {}) {
   return new Promise((resolve, reject) => {
     const video = document.createElement("video");
@@ -9,12 +24,12 @@ async function toGIF(ffmpeg, videoBlob, onProgress = () => {}) {
     video.addEventListener("loadedmetadata", async () => {
       try {
         const duration = video.duration;
-        const width = 540;
+        const width = GIF_WIDTH;
         const height = Math.round(
           (video.videoHeight / video.videoWidth) * width
         );
-        const fps = 12;
-        const quality = 5;
+        const fps = GIF_FPS;
+        const quality = GIF_QUALITY;
 
         canvas.width = width;
         canvas.height = height;

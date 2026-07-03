@@ -656,12 +656,17 @@
     "description": "Download GIF button"
   },
   "downloadGIFButtonDescription": {
-    "message": "Export a GIF (max 30 seconds)",
+    "message": "Export as GIF",
     "description": "Download GIF label"
   },
-  "downloadGIFTooLongToast": {
-    "message": "GIF export is capped at 30 seconds. Trim your clip and try again.",
-    "description": "Toast shown when the user clicks Download as GIF on a clip longer than 30s — explains the silent gate that previously did nothing"
+  "downloadGIFSizeWarning": {
+    "message": "Export as GIF (~$SIZE$, longer clips make bigger files)",
+    "description": "Shown instead of downloadGIFButtonDescription when the estimated GIF export is large enough to warn about",
+    "placeholders": {
+      "size": {
+        "content": "$1"
+      }
+    }
   },
   "audioSilentToast": {
     "message": "No audio detected. Check your mic, mute switch, or audio device.",

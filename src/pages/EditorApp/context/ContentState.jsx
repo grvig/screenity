@@ -3437,17 +3437,6 @@ const ContentState = (props) => {
     if (latest.downloadingGIF || latest.downloading) {
       return;
     }
-    if (latest.duration > 30) {
-      try {
-        chrome.runtime.sendMessage({
-          type: "show-toast",
-          message: chrome.i18n.getMessage("downloadGIFTooLongToast"),
-          timeout: 6000,
-        });
-      } catch {}
-      return;
-    }
-
     setContentState((prevState) => ({
       ...prevState,
       downloadingGIF: true,

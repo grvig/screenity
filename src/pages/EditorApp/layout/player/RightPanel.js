@@ -12,6 +12,7 @@ import CropUI from "../editor/CropUI";
 import AudioUI from "../editor/AudioUI";
 
 import { ContentStateContext } from "../../context/ContentState";
+import { estimateGifSizeBytes } from "../../../Editor/utils/toGIF";
 
 const RightPanel = () => {
   const [contentState, setContentState] = useContext(ContentStateContext);
@@ -45,6 +46,33 @@ const RightPanel = () => {
       return `${base} (${pct}%)`;
     }
     return base;
+  };
+
+  // GIF exports above this estimated size get a heads-up in the button
+  // description instead of the old hard 30s block.
+  const GIF_SIZE_WARNING_THRESHOLD_BYTES = 15 * 1024 * 1024;
+
+  const formatBytes = (bytes) => {
+    const mb = bytes / (1024 * 1024);
+    return mb >= 1000 ? `${(mb / 1024).toFixed(1)} GB` : `${Math.round(mb)} MB`;
+  };
+
+  const getGifSizeWarning = () => {
+    if (!contentState.width || !contentState.height || !contentState.duration) {
+      return null;
+    }
+    const estimatedBytes = estimateGifSizeBytes(
+      contentState.duration,
+      contentState.width,
+      contentState.height
+    );
+    if (estimatedBytes < GIF_SIZE_WARNING_THRESHOLD_BYTES) {
+      return null;
+    }
+    const message = chrome.i18n.getMessage("downloadGIFSizeWarning", [
+      formatBytes(estimatedBytes),
+    ]);
+    return message || `Export as GIF (~${formatBytes(estimatedBytes)})`;
   };
 
   const saveToDrive = () => {
@@ -948,7 +976,6 @@ const RightPanel = () => {
                   // click. downloadGIF self-locks via downloadingGIF.
                   if (
                     contentState.downloadingGIF ||
-                    contentState.duration > 30 ||
                     !contentState.mp4ready ||
                     contentState.noffmpeg
                   ) {
@@ -958,7 +985,6 @@ const RightPanel = () => {
                 }}
                 disabled={
                   contentState.downloadingGIF ||
-                  contentState.duration > 30 ||
                   !contentState.mp4ready ||
                   contentState.noffmpeg
                 }
@@ -981,7 +1007,8 @@ const RightPanel = () => {
                           !contentState.override)
                       ? getNotAvailableLabel()
                       : contentState.mp4ready
-                      ? chrome.i18n.getMessage("downloadGIFButtonDescription")
+                      ? getGifSizeWarning() ||
+                        chrome.i18n.getMessage("downloadGIFButtonDescription")
                       : getPreparingLabel()}
                   </div>
                 </div>
