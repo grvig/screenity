@@ -272,6 +272,32 @@ const RecordingType = (props) => {
           {contentState.customRegion && <RegionDimensions />}
         </div>
       )}
+      {contentState.recordingType !== "camera" && cropActive && (
+        <div>
+          <div className="popup-content-divider"></div>
+          <Switch
+            label={chrome.i18n.getMessage("gifCaptureModeLabel")}
+            name="gifCaptureMode"
+            value="gifCaptureMode"
+            onChange={(checked) => {
+              // GIF exports are file-size sensitive, so switching this on
+              // nudges the user toward area-select instead of full tab/screen
+              if (checked && contentState.recordingType !== "region") {
+                setContentState((prev) => ({
+                  ...prev,
+                  recordingType: "region",
+                  customRegion: true,
+                }));
+                chrome.storage.local.set({
+                  recordingType: "region",
+                  customRegion: true,
+                  region: true,
+                });
+              }
+            }}
+          />
+        </div>
+      )}
       {contentState.isLoggedIn &&
         !contentState.recordingToScene &&
         // Instant mode bakes the whole recording into one non-editable

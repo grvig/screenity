@@ -115,6 +115,10 @@
     "message": "Set an area to record in",
     "description": "Custom area switch label"
   },
+  "gifCaptureModeLabel": {
+    "message": "Recording for GIF",
+    "description": "Switch label; when enabled, nudges the recording toward area-select since GIF exports are file-size sensitive"
+  },
   "flipCameraLabel": {
     "message": "Flip camera",
     "description": "Flip camera switch label"

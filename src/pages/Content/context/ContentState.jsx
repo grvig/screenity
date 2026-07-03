@@ -1170,6 +1170,7 @@ const ContentState = (props) => {
     blurMode: false,
     recordingType: "screen",
     customRegion: false,
+    gifCaptureMode: false,
     regionWidth: 800,
     surface: "default",
     regionHeight: 500,
