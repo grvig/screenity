@@ -8,14 +8,27 @@ export const GIF_QUALITY = 5;
 // screen-recording content (mostly flat color, some text/cursor motion).
 const GIF_BYTES_PER_PIXEL_PER_FRAME = 0.045;
 
-export function estimateGifSizeBytes(duration, sourceWidth, sourceHeight) {
-  const width = GIF_WIDTH;
-  const height = Math.round((sourceHeight / sourceWidth) * width);
-  const totalFrames = Math.max(1, Math.floor(duration * GIF_FPS));
-  return width * height * totalFrames * GIF_BYTES_PER_PIXEL_PER_FRAME;
+export function estimateGifSizeBytes(
+  duration,
+  sourceWidth,
+  sourceHeight,
+  { width = GIF_WIDTH, fps = GIF_FPS, quality = GIF_QUALITY } = {}
+) {
+  const outputWidth = Math.min(width, sourceWidth || width);
+  const height = Math.round((sourceHeight / sourceWidth) * outputWidth);
+  const totalFrames = Math.max(1, Math.floor(duration * fps));
+  // Higher gif.js "quality" values sample colors less often (smaller/worse).
+  const qualityFactor = 5 / quality;
+  return (
+    outputWidth *
+    height *
+    totalFrames *
+    GIF_BYTES_PER_PIXEL_PER_FRAME *
+    qualityFactor
+  );
 }
 
-async function toGIF(ffmpeg, videoBlob, onProgress = () => {}) {
+async function toGIF(ffmpeg, videoBlob, onProgress = () => {}, options = {}) {
   return new Promise((resolve, reject) => {
     const video = document.createElement("video");
     const canvas = document.createElement("canvas");
@@ -24,12 +37,15 @@ async function toGIF(ffmpeg, videoBlob, onProgress = () => {}) {
     video.addEventListener("loadedmetadata", async () => {
       try {
         const duration = video.duration;
-        const width = GIF_WIDTH;
+        const width = Math.min(
+          options.width || GIF_WIDTH,
+          video.videoWidth
+        );
         const height = Math.round(
           (video.videoHeight / video.videoWidth) * width
         );
-        const fps = GIF_FPS;
-        const quality = GIF_QUALITY;
+        const fps = options.fps || GIF_FPS;
+        const quality = options.quality || GIF_QUALITY;
 
         canvas.width = width;
         canvas.height = height;

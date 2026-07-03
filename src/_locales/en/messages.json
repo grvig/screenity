@@ -668,6 +668,18 @@
       }
     }
   },
+  "gifResolutionLabel": {
+    "message": "GIF output width",
+    "description": "Tooltip for the GIF export resolution dropdown"
+  },
+  "gifFpsLabel": {
+    "message": "GIF frame rate",
+    "description": "Tooltip for the GIF export FPS dropdown"
+  },
+  "gifQualityLabel": {
+    "message": "GIF quality",
+    "description": "Tooltip for the GIF export quality dropdown"
+  },
   "audioSilentToast": {
     "message": "No audio detected. Check your mic, mute switch, or audio device.",
     "description": "Toast shown when the recorder has detected 30s of complete silence on the captured audio track. The recording continues — it's a heads-up, not an error."

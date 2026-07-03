@@ -3430,7 +3430,7 @@ const ContentState = (props) => {
     // downloading flags, so there is nothing more to do here.
   };
 
-  const downloadGIF = async () => {
+  const downloadGIF = async (gifOptions) => {
     // ref: rapid clicks fire before state propagates
     const latest = contentStateRef.current || contentState;
     // don't gate on isFfmpegRunning (leaks from bg poll); downloadingGIF is the lock
@@ -3446,6 +3446,7 @@ const ContentState = (props) => {
     sendMessage({
       type: "to-gif",
       blob: latest.blob,
+      options: gifOptions,
     });
   };
 

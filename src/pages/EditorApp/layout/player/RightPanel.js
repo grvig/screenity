@@ -12,7 +12,21 @@ import CropUI from "../editor/CropUI";
 import AudioUI from "../editor/AudioUI";
 
 import { ContentStateContext } from "../../context/ContentState";
-import { estimateGifSizeBytes } from "../../../Editor/utils/toGIF";
+import {
+  estimateGifSizeBytes,
+  GIF_WIDTH,
+  GIF_FPS,
+  GIF_QUALITY,
+} from "../../../Editor/utils/toGIF";
+
+const GIF_WIDTH_OPTIONS = [360, 480, 540, 720, 1080];
+const GIF_FPS_OPTIONS = [6, 10, 12, 15, 20, 24];
+// gif.js "quality" is a color-sampling interval: lower = better/slower.
+const GIF_QUALITY_OPTIONS = [
+  { label: "High", value: 3 },
+  { label: "Medium", value: GIF_QUALITY },
+  { label: "Low", value: 15 },
+];
 
 const RightPanel = () => {
   const [contentState, setContentState] = useContext(ContentStateContext);
@@ -28,6 +42,10 @@ const RightPanel = () => {
   useEffect(() => {
     contentStateRef.current = contentState;
   }, [contentState]);
+
+  const [gifWidth, setGifWidth] = useState(GIF_WIDTH);
+  const [gifFps, setGifFps] = useState(GIF_FPS);
+  const [gifQuality, setGifQuality] = useState(GIF_QUALITY);
 
   const getNotAvailableLabel = () => {
     if (contentState.fallback && contentState.noffmpeg && contentState.editLimit === 0) {
@@ -64,7 +82,8 @@ const RightPanel = () => {
     const estimatedBytes = estimateGifSizeBytes(
       contentState.duration,
       contentState.width,
-      contentState.height
+      contentState.height,
+      { width: gifWidth, fps: gifFps, quality: gifQuality }
     );
     if (estimatedBytes < GIF_SIZE_WARNING_THRESHOLD_BYTES) {
       return null;
@@ -981,7 +1000,11 @@ const RightPanel = () => {
                   ) {
                     return;
                   }
-                  contentState.downloadGIF();
+                  contentState.downloadGIF({
+                    width: gifWidth,
+                    fps: gifFps,
+                    quality: gifQuality,
+                  });
                 }}
                 disabled={
                   contentState.downloadingGIF ||
@@ -1015,6 +1038,41 @@ const RightPanel = () => {
                 <div className={styles.buttonRight}>
                   <ReactSVG src={URL + "editor/icons/right-arrow.svg"} />
                 </div>
+              </div>
+              <div style={{ display: "flex", gap: 8, padding: "8px 4px" }}>
+                <select
+                  value={gifWidth}
+                  onChange={(e) => setGifWidth(Number(e.target.value))}
+                  title={chrome.i18n.getMessage("gifResolutionLabel")}
+                >
+                  {GIF_WIDTH_OPTIONS.map((w) => (
+                    <option key={w} value={w}>
+                      {w}p
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={gifFps}
+                  onChange={(e) => setGifFps(Number(e.target.value))}
+                  title={chrome.i18n.getMessage("gifFpsLabel")}
+                >
+                  {GIF_FPS_OPTIONS.map((f) => (
+                    <option key={f} value={f}>
+                      {f} fps
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={gifQuality}
+                  onChange={(e) => setGifQuality(Number(e.target.value))}
+                  title={chrome.i18n.getMessage("gifQualityLabel")}
+                >
+                  {GIF_QUALITY_OPTIONS.map((q) => (
+                    <option key={q.value} value={q.value}>
+                      {q.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
