@@ -36,6 +36,7 @@ export const updateFromStorage = (check = true, id = null) => {
       "countdown",
       "recordingType",
       "customRegion",
+      "gifCaptureMode",
       "regionWidth",
       "regionHeight",
       "regionX",
@@ -174,6 +175,10 @@ export const updateFromStorage = (check = true, id = null) => {
           result.customRegion !== undefined && result.customRegion !== null
             ? result.customRegion
             : prevContentState.customRegion,
+        gifCaptureMode:
+          result.gifCaptureMode !== undefined && result.gifCaptureMode !== null
+            ? result.gifCaptureMode
+            : prevContentState.gifCaptureMode,
         regionWidth:
           result.regionWidth !== undefined && result.regionWidth !== null
             ? result.regionWidth
