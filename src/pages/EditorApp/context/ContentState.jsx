@@ -102,10 +102,15 @@ const ContentState = (props) => {
   }, []);
 
   useEffect(() => {
+    // one-shot consume (same pattern as recordingMeta elsewhere): deleting
+    // it right after the read means a later reload of this same editor tab
+    // - e.g. after the user clicks "Open full editor instead" - won't
+    // resurrect the minimal GIF screen from a stale flag
     chrome.storage.local.get(["lastGifCaptureMode"], (res) => {
       if (res?.lastGifCaptureMode) {
         setContentState((prev) => ({ ...prev, gifCaptureMode: true }));
       }
+      chrome.storage.local.remove(["lastGifCaptureMode"]);
     });
   }, []);
 
