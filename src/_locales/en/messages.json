@@ -659,6 +659,10 @@
     "message": "Download as .gif",
     "description": "Download GIF button"
   },
+  "openFullEditorLabel": {
+    "message": "Open full editor instead",
+    "description": "Link on the minimal GIF export screen to leave GIF capture mode and use the regular multi-panel editor"
+  },
   "downloadGIFButtonDescription": {
     "message": "Export as GIF",
     "description": "Download GIF label"

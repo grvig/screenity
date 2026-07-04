@@ -1,0 +1,96 @@
+@use "../global/variables.scss" as *;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  gap: $spacing-05;
+  background-color: $color-light-grey;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 720px;
+  width: 90%;
+}
+
+.video {
+  width: 100%;
+  border-radius: $spacing-03;
+  box-shadow: $container-shadow-focus;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: $spacing-04;
+  width: 90%;
+  max-width: 420px;
+  background-color: $color-background;
+  border: $container-border;
+  border-radius: $spacing-03;
+  padding: $spacing-05;
+  box-sizing: border-box;
+}
+
+.title {
+  font-family: $font-bold;
+  font-size: $font-size-normal;
+  color: $color-text-primary;
+}
+
+.sliderRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-04;
+
+  input[type="range"] {
+    flex: 1;
+  }
+}
+
+.sliderLabel {
+  font-family: $font-medium;
+  font-size: $font-size-small;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
+
+.estimate {
+  font-family: $font-medium;
+  font-size: $font-size-small;
+  color: $color-text-secondary;
+}
+
+.downloadButton {
+  font-family: $font-bold;
+  font-size: $font-size-normal;
+  color: $color-text-contrast;
+  background-color: $color-primary;
+  border: none;
+  border-radius: $spacing-03;
+  padding: $spacing-04 $spacing-05;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.exitLink {
+  font-family: $font-medium;
+  font-size: $font-size-small;
+  color: $color-text-secondary;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}

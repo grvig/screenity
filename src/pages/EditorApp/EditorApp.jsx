@@ -6,6 +6,7 @@ import React, { useEffect, useRef, useContext, Suspense, lazy } from "react";
 // Initial open is "player" mode; defer Editor + its TrimUI dependencies.
 const Editor = lazy(() => import("./layout/editor/Editor"));
 import Player from "./layout/player/Player";
+import MinimalGifExportScreen from "./layout/player/MinimalGifExportScreen";
 import Modal from "./components/global/Modal";
 import Toast from "./components/global/Toast";
 
@@ -201,7 +202,13 @@ const EditorApp = () => {
             <Editor />
           </Suspense>
         )}
-      {contentState.mode != "edit" && contentState.ready && <Player />}
+      {contentState.mode != "edit" &&
+        contentState.ready &&
+        (contentState.gifCaptureMode ? (
+          <MinimalGifExportScreen />
+        ) : (
+          <Player />
+        ))}
       {!contentState.ready &&
         new URLSearchParams(window.location.search).get("reviewPreview") !==
           null && <ReviewBanner />}
