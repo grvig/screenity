@@ -4,13 +4,10 @@ import styles from "../../styles/player/_MinimalGifExportScreen.module.scss";
 import { ContentStateContext } from "../../context/ContentState";
 import {
   estimateGifSizeBytes,
+  formatGifSizeBytes,
+  getGifSizeWarningMessage,
   GIF_QUALITY_PRESETS,
 } from "../../../Editor/utils/toGIF";
-
-const formatBytes = (bytes) => {
-  const mb = bytes / (1024 * 1024);
-  return mb >= 1000 ? `${(mb / 1024).toFixed(1)} GB` : `${Math.round(mb)} MB`;
-};
 
 // Standalone screen for recordings made via the "Recording for GIF" popup
 // toggle: preview, one quality slider, download — no trim/crop/other panels.
@@ -64,7 +61,10 @@ const MinimalGifExportScreen = () => {
           />
         </div>
         {estimatedBytes != null && (
-          <div className={styles.estimate}>~{formatBytes(estimatedBytes)}</div>
+          <div className={styles.estimate}>
+            {getGifSizeWarningMessage(estimatedBytes) ||
+              `~${formatGifSizeBytes(estimatedBytes)}`}
+          </div>
         )}
         <button
           className={styles.downloadButton}

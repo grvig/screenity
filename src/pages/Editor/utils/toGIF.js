@@ -35,6 +35,22 @@ export function estimateGifSizeBytes(
   );
 }
 
+// Shared by the full RightPanel and the minimal export screen so both show
+// the same size and the same large-export heads-up.
+export function formatGifSizeBytes(bytes) {
+  const mb = bytes / (1024 * 1024);
+  return mb >= 1000 ? `${(mb / 1024).toFixed(1)} GB` : `${Math.round(mb)} MB`;
+}
+
+export const GIF_SIZE_WARNING_THRESHOLD_BYTES = 15 * 1024 * 1024;
+
+export function getGifSizeWarningMessage(estimatedBytes) {
+  if (estimatedBytes < GIF_SIZE_WARNING_THRESHOLD_BYTES) return null;
+  const size = formatGifSizeBytes(estimatedBytes);
+  const message = chrome.i18n.getMessage("downloadGIFSizeWarning", [size]);
+  return message || `Export as GIF (~${size})`;
+}
+
 async function toGIF(ffmpeg, videoBlob, onProgress = () => {}, options = {}) {
   return new Promise((resolve, reject) => {
     const video = document.createElement("video");

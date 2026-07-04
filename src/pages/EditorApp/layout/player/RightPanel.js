@@ -14,6 +14,7 @@ import AudioUI from "../editor/AudioUI";
 import { ContentStateContext } from "../../context/ContentState";
 import {
   estimateGifSizeBytes,
+  getGifSizeWarningMessage,
   GIF_QUALITY_PRESETS,
 } from "../../../Editor/utils/toGIF";
 
@@ -54,15 +55,6 @@ const RightPanel = () => {
     return base;
   };
 
-  // GIF exports above this estimated size get a heads-up in the button
-  // description instead of the old hard 30s block.
-  const GIF_SIZE_WARNING_THRESHOLD_BYTES = 15 * 1024 * 1024;
-
-  const formatBytes = (bytes) => {
-    const mb = bytes / (1024 * 1024);
-    return mb >= 1000 ? `${(mb / 1024).toFixed(1)} GB` : `${Math.round(mb)} MB`;
-  };
-
   const getGifSizeWarning = () => {
     if (!contentState.width || !contentState.height || !contentState.duration) {
       return null;
@@ -73,13 +65,7 @@ const RightPanel = () => {
       contentState.height,
       gifPreset
     );
-    if (estimatedBytes < GIF_SIZE_WARNING_THRESHOLD_BYTES) {
-      return null;
-    }
-    const message = chrome.i18n.getMessage("downloadGIFSizeWarning", [
-      formatBytes(estimatedBytes),
-    ]);
-    return message || `Export as GIF (~${formatBytes(estimatedBytes)})`;
+    return getGifSizeWarningMessage(estimatedBytes);
   };
 
   const saveToDrive = () => {
