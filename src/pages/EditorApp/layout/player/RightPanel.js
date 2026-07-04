@@ -12,15 +12,10 @@ import CropUI from "../editor/CropUI";
 import AudioUI from "../editor/AudioUI";
 
 import { ContentStateContext } from "../../context/ContentState";
-import { estimateGifSizeBytes, GIF_QUALITY } from "../../../Editor/utils/toGIF";
-
-// Single slider replaces separate width/fps/quality dropdowns: one control,
-// low to high, instead of a multi-panel options screen.
-const GIF_QUALITY_PRESETS = [
-  { labelKey: "gifQualitySmall", width: 360, fps: 10, quality: 15 },
-  { labelKey: "gifQualityBalanced", width: 540, fps: 12, quality: GIF_QUALITY },
-  { labelKey: "gifQualityBest", width: 720, fps: 15, quality: 3 },
-];
+import {
+  estimateGifSizeBytes,
+  GIF_QUALITY_PRESETS,
+} from "../../../Editor/utils/toGIF";
 
 const RightPanel = () => {
   const [contentState, setContentState] = useContext(ContentStateContext);

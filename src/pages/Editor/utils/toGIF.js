@@ -4,6 +4,13 @@ export const GIF_WIDTH = 540;
 export const GIF_FPS = 12;
 export const GIF_QUALITY = 5;
 
+// Single slider preset scale shared by the full and minimal export UIs.
+export const GIF_QUALITY_PRESETS = [
+  { labelKey: "gifQualitySmall", width: 360, fps: 10, quality: 15 },
+  { labelKey: "gifQualityBalanced", width: GIF_WIDTH, fps: GIF_FPS, quality: GIF_QUALITY },
+  { labelKey: "gifQualityBest", width: 720, fps: 15, quality: 3 },
+];
+
 // Empirical bytes-per-pixel-per-frame for gif.js at GIF_QUALITY on typical
 // screen-recording content (mostly flat color, some text/cursor motion).
 const GIF_BYTES_PER_PIXEL_PER_FRAME = 0.045;

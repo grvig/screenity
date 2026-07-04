@@ -102,6 +102,14 @@ const ContentState = (props) => {
   }, []);
 
   useEffect(() => {
+    chrome.storage.local.get(["lastGifCaptureMode"], (res) => {
+      if (res?.lastGifCaptureMode) {
+        setContentState((prev) => ({ ...prev, gifCaptureMode: true }));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     diagMountAtRef.current = Date.now();
     try {
       chrome.tabs.getCurrent((tab) => {

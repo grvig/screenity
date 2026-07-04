@@ -190,6 +190,7 @@ const _startRecordingInner = async (caller) => {
     "recordingUiTabId",
     "customRegion",
     "recordingType",
+    "gifCaptureMode",
   ]);
 
   // Close every prior editor tab by URL (sandboxTab only tracks the last).
@@ -259,6 +260,7 @@ const _startRecordingInner = async (caller) => {
     recordingUiTabId,
     customRegion,
     recordingType,
+    gifCaptureMode,
   } = await _startReads;
   try {
     if (!recordingToScene && !multiMode) {
@@ -311,7 +313,12 @@ const _startRecordingInner = async (caller) => {
     chrome.storage.local.remove(["recordingMeta"]);
   }
 
-  chrome.storage.local.set({ lastRecordingType: recordingType || "screen" });
+  chrome.storage.local.set({
+    lastRecordingType: recordingType || "screen",
+    // read back by the Editor to decide whether to show the minimal
+    // GIF-only export screen instead of the full multi-panel editor
+    lastGifCaptureMode: Boolean(gifCaptureMode),
+  });
 
   const { quality, systemAudio, audioInput, offscreen, alarm, alarmTime, countdown } =
     await chrome.storage.local.get([
