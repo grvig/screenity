@@ -19,6 +19,27 @@ const CAPTURE_PROGRESS_SHARE = 0.5;
 // screen-recording content (mostly flat color, some text/cursor motion).
 const GIF_BYTES_PER_PIXEL_PER_FRAME = 0.045;
 
+// gif.js holds every captured frame as raw RGBA (width * height * 4) until
+// rendering finishes, so frame count - not duration - is what runs the tab out
+// of memory. With the old 30s cap gone, bound the buffer and trade frame rate
+// for length instead, so a long recording exports choppier rather than
+// crashing the editor.
+const MAX_GIF_FRAME_BUFFER_BYTES = 600 * 1024 * 1024;
+
+export function clampGifFps(duration, outputWidth, outputHeight, fps) {
+  const bytesPerFrame = outputWidth * outputHeight * 4;
+  if (!bytesPerFrame || !duration || !fps) return fps;
+  const maxFrames = Math.max(
+    1,
+    Math.floor(MAX_GIF_FRAME_BUFFER_BYTES / bytesPerFrame)
+  );
+  if (Math.floor(duration * fps) <= maxFrames) return fps;
+  // Deliberately allowed below 1fps: any floor would break the memory
+  // guarantee for long enough input, and a sub-1fps delay is still a valid
+  // GIF. Such an export is a bad idea anyway, which the size warning covers.
+  return maxFrames / duration;
+}
+
 export function estimateGifSizeBytes(
   duration,
   sourceWidth,
@@ -27,7 +48,10 @@ export function estimateGifSizeBytes(
 ) {
   const outputWidth = Math.min(width, sourceWidth || width);
   const height = Math.round((sourceHeight / sourceWidth) * outputWidth);
-  const totalFrames = Math.max(1, Math.floor(duration * fps));
+  // Estimate against the fps that will actually be used, not the requested
+  // one, so the size shown matches what the encoder produces.
+  const effectiveFps = clampGifFps(duration, outputWidth, height, fps);
+  const totalFrames = Math.max(1, Math.floor(duration * effectiveFps));
   // Higher gif.js "quality" values sample colors less often (smaller/worse).
   const qualityFactor = 5 / quality;
   return (
@@ -79,7 +103,15 @@ async function toGIF(ffmpeg, videoBlob, onProgress = () => {}, options = {}) {
         const height = Math.round(
           (video.videoHeight / video.videoWidth) * width
         );
-        const fps = options.fps || GIF_FPS;
+        const requestedFps = options.fps || GIF_FPS;
+        const fps = clampGifFps(duration, width, height, requestedFps);
+        if (fps !== requestedFps) {
+          console.warn(
+            `[Screenity][GIF] ${duration.toFixed(1)}s at ${width}x${height} ` +
+              `would exceed the frame buffer budget; reduced ${requestedFps}fps ` +
+              `to ${fps.toFixed(2)}fps`
+          );
+        }
         const quality = options.quality || GIF_QUALITY;
 
         canvas.width = width;
