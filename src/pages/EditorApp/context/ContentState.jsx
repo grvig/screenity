@@ -2225,6 +2225,10 @@ const ContentState = (props) => {
           trimming: false,
           reencoding: false,
           cropping: false,
+          // without this the GIF button stays locked on "Downloading…"
+          // forever (downloadGIF self-locks on it), so a failed encode
+          // can't be retried without reloading the editor
+          downloadingGIF: false,
           processingProgress: 0,
           editErrorType: wasEditing ? "failed" : prev.editErrorType,
           ...(prev.rawBlob || prev.webm
@@ -2258,6 +2262,7 @@ const ContentState = (props) => {
         trimming: false,
         reencoding: false,
         cropping: false,
+        downloadingGIF: false,
         processingProgress: 0,
         editErrorType: "too-long",
       }));
@@ -3078,6 +3083,7 @@ const ContentState = (props) => {
       ...prev,
       downloading: false,
       downloadingWEBM: false,
+      downloadingGIF: false,
       isFfmpegRunning: false,
       processingProgress: 0,
     }));
