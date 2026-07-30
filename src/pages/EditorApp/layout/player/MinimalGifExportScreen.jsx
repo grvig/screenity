@@ -18,6 +18,11 @@ const MinimalGifExportScreen = () => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const preset = GIF_QUALITY_PRESETS[presetIndex];
 
+  // Editor can reach `ready` a tick before the final blob settles, so the
+  // source may briefly be absent; gate both the preview and the download on
+  // it rather than handing downloadGIF a null blob.
+  const hasSource = Boolean(contentState.blob || contentState.webm);
+
   useEffect(() => {
     const source = contentState.blob || contentState.webm;
     if (!source) return;
@@ -39,8 +44,12 @@ const MinimalGifExportScreen = () => {
   return (
     <div className={styles.wrap}>
       <div className={styles.preview}>
-        {previewUrl && (
+        {previewUrl ? (
           <video className={styles.video} src={previewUrl} controls muted />
+        ) : (
+          <div className={styles.previewPlaceholder}>
+            {chrome.i18n.getMessage("preparingLabel")}
+          </div>
         )}
       </div>
       <div className={styles.panel}>
@@ -71,6 +80,7 @@ const MinimalGifExportScreen = () => {
           className={styles.downloadButton}
           disabled={
             contentState.downloadingGIF ||
+            !hasSource ||
             !contentState.mp4ready ||
             contentState.noffmpeg
           }

@@ -25,6 +25,20 @@
   box-shadow: $container-shadow-focus;
 }
 
+.previewPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: $spacing-03;
+  background-color: $color-background;
+  border: $container-border;
+  font-family: $font-medium;
+  font-size: $font-size-small;
+  color: $color-text-secondary;
+}
+
 .panel {
   display: flex;
   flex-direction: column;
