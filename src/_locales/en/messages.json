@@ -676,6 +676,15 @@
       }
     }
   },
+  "gifReducedFrameRateNotice": {
+    "message": "Frame rate reduced to $FPS$ fps to fit this length",
+    "description": "Shown before a GIF export when the clip is long enough that the requested frame rate would exceed the encoder's memory budget",
+    "placeholders": {
+      "fps": {
+        "content": "$1"
+      }
+    }
+  },
   "gifQualityLabel": {
     "message": "GIF quality",
     "description": "Tooltip for the GIF export quality slider"

@@ -5,8 +5,8 @@ import { ContentStateContext } from "../../context/ContentState";
 import {
   estimateGifSizeBytes,
   formatGifSizeBytes,
+  getGifExportNotices,
   getGifProgressLabel,
-  getGifSizeWarningMessage,
   GIF_QUALITY_PRESETS,
 } from "../../../Editor/utils/toGIF";
 
@@ -41,6 +41,13 @@ const MinimalGifExportScreen = () => {
         )
       : null;
 
+  const notices = getGifExportNotices(
+    contentState.duration,
+    contentState.width,
+    contentState.height,
+    preset
+  );
+
   return (
     <div className={styles.wrap}>
       <div className={styles.preview}>
@@ -72,10 +79,14 @@ const MinimalGifExportScreen = () => {
         </div>
         {estimatedBytes != null && (
           <div className={styles.estimate}>
-            {getGifSizeWarningMessage(estimatedBytes) ||
-              `~${formatGifSizeBytes(estimatedBytes)}`}
+            ~{formatGifSizeBytes(estimatedBytes)}
           </div>
         )}
+        {notices.map((notice) => (
+          <div key={notice} className={styles.notice}>
+            {notice}
+          </div>
+        ))}
         <button
           className={styles.downloadButton}
           disabled={

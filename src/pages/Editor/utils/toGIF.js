@@ -80,6 +80,44 @@ export function getGifProgressLabel(processingProgress) {
 
 export const GIF_SIZE_WARNING_THRESHOLD_BYTES = 15 * 1024 * 1024;
 
+// Heads-up lines for a pending export, most important first. Reducing fps also
+// shrinks the file, so a frame-rate drop never trips the size warning - without
+// its own notice the GIF just comes out mysteriously choppy.
+export function getGifExportNotices(
+  duration,
+  sourceWidth,
+  sourceHeight,
+  preset
+) {
+  const notices = [];
+  if (!duration || !sourceWidth || !sourceHeight) return notices;
+
+  const outputWidth = Math.min(preset.width, sourceWidth);
+  const outputHeight = Math.round((sourceHeight / sourceWidth) * outputWidth);
+
+  const sizeWarning = getGifSizeWarningMessage(
+    estimateGifSizeBytes(duration, sourceWidth, sourceHeight, preset)
+  );
+  if (sizeWarning) notices.push(sizeWarning);
+
+  const effectiveFps = clampGifFps(
+    duration,
+    outputWidth,
+    outputHeight,
+    preset.fps
+  );
+  if (effectiveFps < preset.fps) {
+    const shown =
+      effectiveFps >= 1 ? Math.round(effectiveFps) : effectiveFps.toFixed(1);
+    notices.push(
+      chrome.i18n.getMessage("gifReducedFrameRateNotice", [String(shown)]) ||
+        `Frame rate reduced to ${shown} fps to fit this length`
+    );
+  }
+
+  return notices;
+}
+
 export function getGifSizeWarningMessage(estimatedBytes) {
   if (estimatedBytes < GIF_SIZE_WARNING_THRESHOLD_BYTES) return null;
   const size = formatGifSizeBytes(estimatedBytes);

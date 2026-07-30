@@ -82,6 +82,15 @@
   color: $color-text-secondary;
 }
 
+.notice {
+  font-family: $font-medium;
+  font-size: $font-size-small;
+  color: $color-text-primary;
+  background-color: $color-primary-transparent;
+  border-radius: $spacing-02;
+  padding: $spacing-03;
+}
+
 .downloadButton {
   font-family: $font-bold;
   font-size: $font-size-normal;

@@ -13,9 +13,8 @@ import AudioUI from "../editor/AudioUI";
 
 import { ContentStateContext } from "../../context/ContentState";
 import {
-  estimateGifSizeBytes,
+  getGifExportNotices,
   getGifProgressLabel,
-  getGifSizeWarningMessage,
   GIF_QUALITY_PRESETS,
 } from "../../../Editor/utils/toGIF";
 
@@ -56,18 +55,15 @@ const RightPanel = () => {
     return base;
   };
 
-  const getGifSizeWarning = () => {
-    if (!contentState.width || !contentState.height || !contentState.duration) {
-      return null;
-    }
-    const estimatedBytes = estimateGifSizeBytes(
+  // One line only - the button is a fixed-height row, so show the most
+  // important notice and let the minimal export screen show the full set.
+  const getGifSizeWarning = () =>
+    getGifExportNotices(
       contentState.duration,
       contentState.width,
       contentState.height,
       gifPreset
-    );
-    return getGifSizeWarningMessage(estimatedBytes);
-  };
+    )[0] || null;
 
   const saveToDrive = () => {
     setContentState((prevContentState) => ({
