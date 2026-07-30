@@ -676,7 +676,7 @@
     "description": "Przycisk pobierania jako GIF"
   },
   "downloadGIFButtonDescription": {
-    "message": "Eksportuj jako GIF (maks. 30 sekund)",
+    "message": "Eksportuj jako GIF",
     "description": "Etykieta pobierania GIF"
   },
   "shareModalSandboxTitle": {
@@ -1622,9 +1622,6 @@
   },
   "editorRecoveryFailedDescription": {
     "message": "Coś poszło nie tak podczas ładowania nagrania w edytorze. Twoje nagranie może wciąż być zapisane na urządzeniu. Możesz teraz spróbować je odzyskać."
-  },
-  "downloadGIFTooLongToast": {
-    "message": "Eksport do GIF jest ograniczony do 30 sekund. Skróć klip i spróbuj ponownie."
   },
   "audioSilentToast": {
     "message": "Nie wykryto dźwięku. Sprawdź mikrofon, przełącznik wyciszenia lub urządzenie audio."

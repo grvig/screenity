@@ -676,7 +676,7 @@
     "description": "GIF डाउनलोड बटन"
   },
   "downloadGIFButtonDescription": {
-    "message": "एक GIF निर्यात करें (अधिकतम 30 सेकंड)",
+    "message": "एक GIF निर्यात करें",
     "description": "GIF डाउनलोड लेबल"
   },
   "shareModalSandboxTitle": {
@@ -1622,9 +1622,6 @@
   },
   "editorRecoveryFailedDescription": {
     "message": "रिकॉर्डिंग को एडिटर में लोड करते समय कुछ गड़बड़ हो गई। आपकी रिकॉर्डिंग अब भी आपके डिवाइस पर सहेजी हो सकती है। आप इसे अभी रिकवर करने का प्रयास कर सकते हैं।"
-  },
-  "downloadGIFTooLongToast": {
-    "message": "GIF एक्सपोर्ट की सीमा 30 सेकंड है। अपनी क्लिप को छोटा करें और फिर से प्रयास करें।"
   },
   "audioSilentToast": {
     "message": "कोई ऑडियो नहीं मिला। अपना माइक, म्यूट स्विच, या ऑडियो डिवाइस जांचें।"

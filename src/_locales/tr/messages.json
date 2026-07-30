@@ -676,7 +676,7 @@
     "description": "GIF olarak İndir düğmesi"
   },
   "downloadGIFButtonDescription": {
-    "message": "GIF olarak dışa aktar (maksimum 30 saniye)",
+    "message": "GIF olarak dışa aktar",
     "description": "GIF olarak İndir etiketi"
   },
   "shareModalSandboxTitle": {
@@ -1622,9 +1622,6 @@
   },
   "editorRecoveryFailedDescription": {
     "message": "Kayıt düzenleyiciye yüklenirken bir sorun oluştu. Kaydınız hâlâ cihazınızda kayıtlı olabilir. Şimdi kurtarmayı deneyebilirsiniz."
-  },
-  "downloadGIFTooLongToast": {
-    "message": "GIF dışa aktarımı en fazla 30 saniyedir. Klibinizi kısaltıp tekrar deneyin."
   },
   "audioSilentToast": {
     "message": "Ses algılanmadı. Mikrofonunuzu, sessize alma düğmesini veya ses cihazınızı kontrol edin."

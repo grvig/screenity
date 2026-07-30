@@ -676,7 +676,7 @@
     "description": "Download GIF button"
   },
   "downloadGIFButtonDescription": {
-    "message": "导出为 GIF（最长30秒）",
+    "message": "导出为 GIF",
     "description": "Download GIF label"
   },
   "shareModalSandboxTitle": {
@@ -1618,9 +1618,6 @@
   },
   "editorRecoveryFailedDescription": {
     "message": "将录制加载到编辑器时出现问题。您的录制可能仍保存在设备上。您可以现在尝试恢复。"
-  },
-  "downloadGIFTooLongToast": {
-    "message": "GIF 导出最长为 30 秒。请裁剪您的片段后重试。"
   },
   "audioSilentToast": {
     "message": "未检测到音频。请检查您的麦克风、静音开关或音频设备。"

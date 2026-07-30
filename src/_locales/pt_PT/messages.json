@@ -676,7 +676,7 @@
     "description": "Botão de baixar GIF"
   },
   "downloadGIFButtonDescription": {
-    "message": "Exportar um GIF (máximo de 30 segundos)",
+    "message": "Exportar um GIF",
     "description": "Rótulo de baixar GIF"
   },
   "shareModalSandboxTitle": {
@@ -1622,9 +1622,6 @@
   },
   "editorRecoveryFailedDescription": {
     "message": "Algo correu mal ao carregar a tua gravação no editor. Pode ainda estar guardada no teu dispositivo. Podes tentar recuperá-la agora."
-  },
-  "downloadGIFTooLongToast": {
-    "message": "A exportação para GIF tem limite de 30 segundos. Corta o teu clipe e tenta novamente."
   },
   "audioSilentToast": {
     "message": "Não foi detetado áudio. Verifica o microfone, o botão de silêncio ou o dispositivo de áudio."

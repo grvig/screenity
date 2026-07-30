@@ -676,7 +676,7 @@
     "description": "Download GIF button"
   },
   "downloadGIFButtonDescription": {
-    "message": "GIF 내보내기 (최대 30초)",
+    "message": "GIF 내보내기",
     "description": "Download GIF label"
   },
   "shareModalSandboxTitle": {
@@ -1622,9 +1622,6 @@
   },
   "editorRecoveryFailedDescription": {
     "message": "편집기에 녹화를 불러오는 중 문제가 발생했습니다. 녹화 파일은 기기에 저장되어 있을 수 있습니다. 지금 복구를 시도해 보세요."
-  },
-  "downloadGIFTooLongToast": {
-    "message": "GIF 내보내기는 최대 30초까지 가능합니다. 클립을 자른 뒤 다시 시도해 주세요."
   },
   "audioSilentToast": {
     "message": "오디오가 감지되지 않았습니다. 마이크, 음소거 스위치 또는 오디오 장치를 확인해 주세요."

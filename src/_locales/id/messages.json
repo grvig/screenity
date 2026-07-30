@@ -676,7 +676,7 @@
     "description": "Tombol Unduh GIF label"
   },
   "downloadGIFButtonDescription": {
-    "message": "Ekspor GIF (maksimal 30 detik)",
+    "message": "Ekspor GIF",
     "description": "Label Unduh GIF"
   },
   "shareModalSandboxTitle": {
@@ -1622,9 +1622,6 @@
   },
   "editorRecoveryFailedDescription": {
     "message": "Terjadi masalah saat memuat rekaman ke editor. Rekaman Anda mungkin masih tersimpan di perangkat. Anda dapat mencoba memulihkannya sekarang."
-  },
-  "downloadGIFTooLongToast": {
-    "message": "Ekspor GIF dibatasi hingga 30 detik. Pangkas klip Anda dan coba lagi."
   },
   "audioSilentToast": {
     "message": "Tidak ada audio terdeteksi. Periksa mikrofon, sakelar bisu, atau perangkat audio Anda."

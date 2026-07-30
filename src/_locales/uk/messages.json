@@ -676,7 +676,7 @@
     "description": "Download GIF button"
   },
   "downloadGIFButtonDescription": {
-    "message": "Експорт у форматі GIF (максимум 30 секунд)",
+    "message": "Експорт у форматі GIF",
     "description": "Download GIF label"
   },
   "shareModalSandboxTitle": {
@@ -1614,9 +1614,6 @@
   },
   "editorRecoveryFailedDescription": {
     "message": "Під час завантаження запису в редактор сталася помилка. Можливо, ваш запис ще збережено на пристрої. Ви можете спробувати відновити його зараз."
-  },
-  "downloadGIFTooLongToast": {
-    "message": "Експорт у GIF обмежено 30 секундами. Обріжте кліп і спробуйте знову."
   },
   "audioSilentToast": {
     "message": "Звук не виявлено. Перевірте мікрофон, перемикач вимкнення звуку або аудіопристрій."
