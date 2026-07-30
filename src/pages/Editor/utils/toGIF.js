@@ -11,6 +11,10 @@ export const GIF_QUALITY_PRESETS = [
   { labelKey: "gifQualityBest", width: 720, fps: 15, quality: 3 },
 ];
 
+// Fraction of reported progress spent seeking/drawing frames before gif.js
+// starts encoding them.
+const CAPTURE_PROGRESS_SHARE = 0.5;
+
 // Empirical bytes-per-pixel-per-frame for gif.js at GIF_QUALITY on typical
 // screen-recording content (mostly flat color, some text/cursor motion).
 const GIF_BYTES_PER_PIXEL_PER_FRAME = 0.045;
@@ -40,6 +44,14 @@ export function estimateGifSizeBytes(
 export function formatGifSizeBytes(bytes) {
   const mb = bytes / (1024 * 1024);
   return mb >= 1000 ? `${(mb / 1024).toFixed(1)} GB` : `${Math.round(mb)} MB`;
+}
+
+// GIF encoding has no cap now, so long exports can run a while; show the
+// percentage rather than an indefinite "Downloading…".
+export function getGifProgressLabel(processingProgress) {
+  const base = chrome.i18n.getMessage("downloadingLabel");
+  const pct = Math.round(processingProgress || 0);
+  return pct > 0 && pct < 100 ? `${base} (${pct}%)` : base;
 }
 
 export const GIF_SIZE_WARNING_THRESHOLD_BYTES = 15 * 1024 * 1024;
@@ -95,7 +107,10 @@ async function toGIF(ffmpeg, videoBlob, onProgress = () => {}, options = {}) {
                 delay: Math.round(1000 / fps),
               });
               frameCount++;
-              onProgress(frameCount / totalFrames);
+              // Frame capture is the first half of the bar and gif.js's
+              // own render pass is the second, so progress stays monotonic
+              // instead of running 0->100 twice.
+              onProgress(CAPTURE_PROGRESS_SHARE * (frameCount / totalFrames));
               resolveFrame();
             };
             video.addEventListener("seeked", seekHandler);
@@ -114,7 +129,11 @@ async function toGIF(ffmpeg, videoBlob, onProgress = () => {}, options = {}) {
           resolve(blob);
         });
 
-        gif.on("progress", (progress) => onProgress(progress));
+        gif.on("progress", (progress) =>
+          onProgress(
+            CAPTURE_PROGRESS_SHARE + (1 - CAPTURE_PROGRESS_SHARE) * progress
+          )
+        );
 
         gif.render();
       } catch (error) {

@@ -5,6 +5,7 @@ import { ContentStateContext } from "../../context/ContentState";
 import {
   estimateGifSizeBytes,
   formatGifSizeBytes,
+  getGifProgressLabel,
   getGifSizeWarningMessage,
   GIF_QUALITY_PRESETS,
 } from "../../../Editor/utils/toGIF";
@@ -76,7 +77,7 @@ const MinimalGifExportScreen = () => {
           onClick={() => contentState.downloadGIF(preset)}
         >
           {contentState.downloadingGIF
-            ? chrome.i18n.getMessage("downloadingLabel")
+            ? getGifProgressLabel(contentState.processingProgress)
             : chrome.i18n.getMessage("downloadGIFButtonTitle")}
         </button>
         <button

@@ -14,6 +14,7 @@ import AudioUI from "../editor/AudioUI";
 import { ContentStateContext } from "../../context/ContentState";
 import {
   estimateGifSizeBytes,
+  getGifProgressLabel,
   getGifSizeWarningMessage,
   GIF_QUALITY_PRESETS,
 } from "../../../Editor/utils/toGIF";
@@ -988,7 +989,7 @@ const RightPanel = () => {
                 <div className={styles.buttonMiddle}>
                   <div className={styles.buttonTitle}>
                     {contentState.downloadingGIF
-                      ? chrome.i18n.getMessage("downloadingLabel")
+                      ? getGifProgressLabel(contentState.processingProgress)
                       : chrome.i18n.getMessage("downloadGIFButtonTitle")}
                   </div>
                   <div className={styles.buttonDescription}>
