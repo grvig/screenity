@@ -101,14 +101,23 @@ const MinimalGifExportScreen = () => {
             ? getGifProgressLabel(contentState.processingProgress)
             : chrome.i18n.getMessage("downloadGIFButtonTitle")}
         </button>
-        <button
-          className={styles.exitLink}
-          onClick={() =>
-            setContentState((prev) => ({ ...prev, gifCaptureMode: false }))
-          }
-        >
-          {chrome.i18n.getMessage("openFullEditorLabel")}
-        </button>
+        {contentState.downloadingGIF ? (
+          <button
+            className={styles.exitLink}
+            onClick={() => contentState.cancelGIF()}
+          >
+            {chrome.i18n.getMessage("cancelButton")}
+          </button>
+        ) : (
+          <button
+            className={styles.exitLink}
+            onClick={() =>
+              setContentState((prev) => ({ ...prev, gifCaptureMode: false }))
+            }
+          >
+            {chrome.i18n.getMessage("openFullEditorLabel")}
+          </button>
+        )}
       </div>
     </div>
   );

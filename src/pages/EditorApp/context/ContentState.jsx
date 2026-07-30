@@ -2167,6 +2167,15 @@ const ContentState = (props) => {
         isFfmpegRunning: false,
         downloadingGIF: false,
       }));
+    } else if (event.data.type === "gif-cancelled") {
+      // User-initiated, so reset silently - no error state, and notably no
+      // noffmpeg flag, so the GIF button stays usable for a retry.
+      setContentState((prevContentState) => ({
+        ...prevContentState,
+        isFfmpegRunning: false,
+        downloadingGIF: false,
+        processingProgress: 0,
+      }));
     } else if (event.data.type === "new-frame") {
       // crop entries leak blob URLs otherwise
       const prevFrame = contentStateRef.current?.frame;
@@ -3469,6 +3478,13 @@ const ContentState = (props) => {
     });
   };
 
+  // Uncapped exports can run for minutes, so let the user back out. The running
+  // encode polls this and replies "gif-cancelled", which does the state reset.
+  const cancelGIF = () => {
+    if (!(contentStateRef.current || contentState).downloadingGIF) return;
+    sendMessage({ type: "cancel-gif" });
+  };
+
   const loadFFmpeg = async () => {
     sendMessage({ type: "load-ffmpeg" });
   };
@@ -3496,6 +3512,7 @@ const ContentState = (props) => {
   contentState.handleReencode = handleReencode;
   contentState.getFrame = getImage;
   contentState.downloadGIF = downloadGIF;
+  contentState.cancelGIF = cancelGIF;
   contentState.downloadWEBM = downloadWEBM;
   contentState.addAudio = addAudio;
   contentState.loadFFmpeg = loadFFmpeg;

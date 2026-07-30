@@ -1,4 +1,7 @@
 import GIF from "gif.js";
+import { GIF_CANCELLED_ERROR } from "./gifCancelled";
+
+export { GIF_CANCELLED_ERROR };
 
 export const GIF_WIDTH = 540;
 export const GIF_FPS = 12;
@@ -126,6 +129,7 @@ export function getGifSizeWarningMessage(estimatedBytes) {
 }
 
 async function toGIF(ffmpeg, videoBlob, onProgress = () => {}, options = {}) {
+  const shouldCancel = options.shouldCancel || (() => false);
   return new Promise((resolve, reject) => {
     const video = document.createElement("video");
     const canvas = document.createElement("canvas");
@@ -187,7 +191,19 @@ async function toGIF(ffmpeg, videoBlob, onProgress = () => {}, options = {}) {
             video.currentTime = time;
           });
 
+        // abort() also terminates the render workers, so this covers a cancel
+        // during either phase.
+        gif.on("abort", () => {
+          URL.revokeObjectURL(video.src);
+          video.remove();
+          reject(new Error(GIF_CANCELLED_ERROR));
+        });
+
         for (let i = 0; i < totalFrames; i++) {
+          if (shouldCancel()) {
+            gif.abort();
+            return;
+          }
           const time = Math.min(i * frameInterval, duration - 0.001);
           await captureFrame(time);
         }
@@ -199,11 +215,15 @@ async function toGIF(ffmpeg, videoBlob, onProgress = () => {}, options = {}) {
           resolve(blob);
         });
 
-        gif.on("progress", (progress) =>
+        gif.on("progress", (progress) => {
+          if (shouldCancel()) {
+            gif.abort();
+            return;
+          }
           onProgress(
             CAPTURE_PROGRESS_SHARE + (1 - CAPTURE_PROGRESS_SHARE) * progress
-          )
-        );
+          );
+        });
 
         gif.render();
       } catch (error) {

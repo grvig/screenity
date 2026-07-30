@@ -3,6 +3,11 @@
 // used to post, so ContentState's result handlers fire unchanged.
 // Each video op is lazy-loaded to keep the ~630KB mediabunny chunk off mount.
 import { fixWebmDurationOffThread } from "../Editor/utils/fixWebmDurationOffThread";
+import { GIF_CANCELLED_ERROR } from "../Editor/utils/gifCancelled";
+
+// Set by the "cancel-gif" op and polled by the running encode. Only one GIF
+// export can be in flight (downloadGIF self-locks), so a single flag is enough.
+let gifCancelRequested = false;
 
 const lazyUtil = (importFn) =>
   (...args) =>
@@ -261,17 +266,36 @@ export async function runEditorOp(message, reply, { viewer = false } = {}) {
         break;
       }
 
+      case "cancel-gif": {
+        gifCancelRequested = true;
+        break;
+      }
+
       case "to-gif": {
-        const blob = await toGIF(
-          null,
-          message.blob,
-          (progress) =>
-            reply({
-              type: "ffmpeg-progress",
-              progress: Math.round(progress * 100),
-            }),
-          message.options,
-        );
+        gifCancelRequested = false;
+        let blob;
+        try {
+          blob = await toGIF(
+            null,
+            message.blob,
+            (progress) =>
+              reply({
+                type: "ffmpeg-progress",
+                progress: Math.round(progress * 100),
+              }),
+            { ...message.options, shouldCancel: () => gifCancelRequested },
+          );
+        } catch (error) {
+          // A cancel is a normal outcome, not an encoder failure; letting it
+          // reach the generic handler would flag ffmpeg as broken and disable
+          // the GIF button for the rest of the session.
+          const msg = error instanceof Error ? error.message : String(error);
+          if (msg === GIF_CANCELLED_ERROR) {
+            reply({ type: "gif-cancelled" });
+            break;
+          }
+          throw error;
+        }
         const base64 = await toBase64(blob);
         reply({ type: "download-gif", base64 });
         break;
