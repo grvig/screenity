@@ -83,24 +83,33 @@ export function getGifProgressLabel(processingProgress) {
 
 export const GIF_SIZE_WARNING_THRESHOLD_BYTES = 15 * 1024 * 1024;
 
-// Heads-up lines for a pending export, most important first. Reducing fps also
-// shrinks the file, so a frame-rate drop never trips the size warning - without
-// its own notice the GIF just comes out mysteriously choppy.
-export function getGifExportNotices(
+// Everything the export UIs need about a pending export: the estimated size and
+// any heads-up lines, most important first. Returned together so the size shown
+// and the size the warning threshold was tested against can't drift apart.
+// Reducing fps also shrinks the file, so a frame-rate drop never trips the size
+// warning - without its own notice the GIF just comes out mysteriously choppy.
+export function getGifExportPreview(
   duration,
   sourceWidth,
   sourceHeight,
   preset
 ) {
-  const notices = [];
-  if (!duration || !sourceWidth || !sourceHeight) return notices;
+  if (!duration || !sourceWidth || !sourceHeight) {
+    return { estimatedBytes: null, notices: [] };
+  }
 
   const outputWidth = Math.min(preset.width, sourceWidth);
   const outputHeight = Math.round((sourceHeight / sourceWidth) * outputWidth);
 
-  const sizeWarning = getGifSizeWarningMessage(
-    estimateGifSizeBytes(duration, sourceWidth, sourceHeight, preset)
+  const estimatedBytes = estimateGifSizeBytes(
+    duration,
+    sourceWidth,
+    sourceHeight,
+    preset
   );
+
+  const notices = [];
+  const sizeWarning = getGifSizeWarningMessage(estimatedBytes);
   if (sizeWarning) notices.push(sizeWarning);
 
   const effectiveFps = clampGifFps(
@@ -118,7 +127,7 @@ export function getGifExportNotices(
     );
   }
 
-  return notices;
+  return { estimatedBytes, notices };
 }
 
 export function getGifSizeWarningMessage(estimatedBytes) {

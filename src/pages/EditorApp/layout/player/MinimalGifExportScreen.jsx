@@ -3,9 +3,8 @@ import styles from "../../styles/player/_MinimalGifExportScreen.module.scss";
 
 import { ContentStateContext } from "../../context/ContentState";
 import {
-  estimateGifSizeBytes,
   formatGifSizeBytes,
-  getGifExportNotices,
+  getGifExportPreview,
   getGifProgressLabel,
   GIF_QUALITY_PRESETS,
 } from "../../../Editor/utils/toGIF";
@@ -31,17 +30,7 @@ const MinimalGifExportScreen = () => {
     return () => URL.revokeObjectURL(url);
   }, [contentState.blob, contentState.webm]);
 
-  const estimatedBytes =
-    contentState.width && contentState.height && contentState.duration
-      ? estimateGifSizeBytes(
-          contentState.duration,
-          contentState.width,
-          contentState.height,
-          preset
-        )
-      : null;
-
-  const notices = getGifExportNotices(
+  const { estimatedBytes, notices } = getGifExportPreview(
     contentState.duration,
     contentState.width,
     contentState.height,

@@ -13,7 +13,7 @@ import AudioUI from "../editor/AudioUI";
 
 import { ContentStateContext } from "../../context/ContentState";
 import {
-  getGifExportNotices,
+  getGifExportPreview,
   getGifProgressLabel,
   GIF_QUALITY_PRESETS,
 } from "../../../Editor/utils/toGIF";
@@ -58,12 +58,12 @@ const RightPanel = () => {
   // One line only - the button is a fixed-height row, so show the most
   // important notice and let the minimal export screen show the full set.
   const getGifSizeWarning = () =>
-    getGifExportNotices(
+    getGifExportPreview(
       contentState.duration,
       contentState.width,
       contentState.height,
       gifPreset
-    )[0] || null;
+    ).notices[0] || null;
 
   const saveToDrive = () => {
     setContentState((prevContentState) => ({
