@@ -14,6 +14,13 @@ const CLOUD_FEATURES_ENABLED =
 
 const getState = () => contentStateRef.current;
 
+// Camera-only and GIF capture both hide the drawing/blur/cursor buttons, so
+// their shortcuts must be inert too - otherwise a bound key silently turns on
+// a tool with no visible control left to turn it back off.
+const toolsHiddenForRecording = () =>
+  contentStateRef.current.recordingType === "camera" ||
+  Boolean(contentStateRef.current.gifCaptureMode);
+
 export const setupHandlers = () => {
   if (window.__screenitySetupHandlersRan) return;
   window.__screenitySetupHandlersRan = true;
@@ -531,7 +538,7 @@ export const setupHandlers = () => {
     if (document.hidden || !document.hasFocus()) {
       return;
     }
-    if (contentStateRef.current.recordingType === "camera") return;
+    if (toolsHiddenForRecording()) return;
     const nextDrawingMode = !contentStateRef.current.drawingMode;
     setContentState((prev) => ({
       ...prev,
@@ -545,7 +552,7 @@ export const setupHandlers = () => {
   });
 
   registerMessage("toggle-blur-mode", () => {
-    if (contentStateRef.current.recordingType === "camera") return;
+    if (toolsHiddenForRecording()) return;
     const nextBlurMode = !contentStateRef.current.blurMode;
     setContentState((prev) => ({
       ...prev,
@@ -573,7 +580,7 @@ export const setupHandlers = () => {
   });
 
   registerMessage("toggle-cursor-mode", () => {
-    if (contentStateRef.current.recordingType === "camera") return;
+    if (toolsHiddenForRecording()) return;
     const state = getState();
     const nextMode =
       contentStateRef.current.cursorMode === "none" ? "cursor" : "";
