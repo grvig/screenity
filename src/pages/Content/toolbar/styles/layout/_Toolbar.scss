@@ -233,7 +233,7 @@ iframe.screenity-iframe {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f6f7fb;
+  background: $color-light-grey;
   border-radius: $container-border-radius;
   font-family: $font-medium;
   height: calc(100% - 12px);
