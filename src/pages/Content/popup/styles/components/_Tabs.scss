@@ -97,7 +97,7 @@ input {
   bottom: 0px;
   margin-top: auto;
   margin-bottom: auto;
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   background: $color-background;
   box-shadow: $container-shadow-focus;
   transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -123,14 +123,14 @@ input {
   margin-top: 40px;
 }
 .TabsList.tl {
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   background: $color-light-grey;
   padding: 6px;
   font-family: $font-bold;
   position: relative;
 }
 .TabsTrigger.tl {
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   background: transparent;
   height: 32px;
   display: flex;
@@ -160,7 +160,7 @@ input {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   margin-right: $spacing-02;
 }
 
@@ -208,7 +208,7 @@ input {
     bottom: 0px;
     margin: auto;
     height: 2px;
-    border-radius: 30px;
+    border-radius: $container-border-radius;
     background: $color-primary;
   }
   .TabsTrigger[data-state="active"] > .TabsTriggerLabel {
@@ -227,7 +227,7 @@ input {
     text-align: center;
     margin: auto;
     margin-bottom: $spacing-03;
-    border-radius: 30px;
+    border-radius: $container-border-radius;
   }
   .TabsContent {
     background: $color-light-grey;
@@ -297,7 +297,7 @@ input {
     bottom: 0px;
     margin: auto;
     height: 2px;
-    border-radius: 30px;
+    border-radius: $container-border-radius;
     background: $color-primary;
   }
   .TabsTrigger[data-state="active"] > .TabsTriggerLabel {

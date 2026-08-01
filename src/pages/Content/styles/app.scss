@@ -57,7 +57,7 @@
   margin-right: 8px;
   padding-top: 12px;
   padding-bottom: 12px;
-  border-radius: 15px;
+  border-radius: $container-border-radius-sm;
   z-index: 99999;
   font-family: "Satoshi-Medium", sans-serif;
   color: $color-text-primary;
@@ -223,7 +223,7 @@
         color: $color-text-contrast !important;
         border: none !important;
         padding: 10px 14px !important;
-        border-radius: 30px !important;
+        border-radius: $container-border-radius !important;
         font-family: $font-medium !important;
         font-weight: 500 !important;
         cursor: pointer !important;

@@ -2,7 +2,7 @@
 
 .video-item-root {
   width: calc(100% - 2 * #{$spacing-03});
-  border-radius: 15px;
+  border-radius: $container-border-radius-sm;
   padding: $spacing-03;
   display: block;
   .video-item {

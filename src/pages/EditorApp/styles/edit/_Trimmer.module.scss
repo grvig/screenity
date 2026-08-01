@@ -55,7 +55,7 @@
     content: "";
     width: 2px;
     height: 12px;
-    border-radius: 30px;
+    border-radius: $container-border-radius;
     background-color: $color-text-contrast;
     position: absolute;
     top: 0px;

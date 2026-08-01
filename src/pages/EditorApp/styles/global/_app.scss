@@ -122,7 +122,7 @@ $margin-offset: 8px;
 .cropper {
   max-width: 80%;
   height: 80%;
-  border-radius: 15px;
+  border-radius: $container-border-radius-sm;
   margin: auto !important;
   position: absolute !important;
   top: 0px;
@@ -212,7 +212,7 @@ button {
 
 .AlertDialogContent {
   background-color: $color-light-grey;
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
     hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   position: fixed;
@@ -257,7 +257,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   padding: 0 15px;
   font-size: 14px;
   line-height: 1;
@@ -323,7 +323,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   padding: 0 15px;
   font-size: 14px;
   line-height: 1;
@@ -449,7 +449,7 @@ button {
   box-sizing: border-box;
   background: $color-background;
   border: 1px solid $color-border;
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   padding: 8px 12px 8px 18px;
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.18);
   z-index: 20;
@@ -559,7 +559,7 @@ button {
 .review-toast-btn {
   height: 34px;
   padding: 0 14px;
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   font-size: 13px;
   font-family: $font-bold;
   cursor: pointer;
@@ -593,7 +593,7 @@ button {
   height: 37px !important;
   white-space: nowrap !important;
   padding: 0 12px;
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   border: 1px solid transparent;
   font-size: 13px;
 
@@ -609,7 +609,7 @@ button {
   height: 37px !important;
   white-space: nowrap !important;
   padding: 0 12px;
-  border-radius: 30px;
+  border-radius: $container-border-radius;
   border: none;
   font-size: 13px;
   font-family: $font-bold;
