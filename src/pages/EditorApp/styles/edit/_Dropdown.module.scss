@@ -78,7 +78,7 @@
   width: var(--radix-select-trigger-width);
   max-height: var(--radix-select-content-available-height);
   font-family: $font-medium;
-  background-color: white;
+  background-color: $color-light-grey;
   border-radius: 15px;
   margin-top: $spacing-02;
   box-shadow: $container-shadow-focus;
@@ -135,7 +135,7 @@
   align-items: center;
   justify-content: center;
   height: 25px;
-  background-color: white;
+  background-color: $color-light-grey;
   color: var(--violet11);
   cursor: default;
 }

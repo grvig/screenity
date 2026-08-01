@@ -433,7 +433,7 @@ iframe.screenity-iframe {
   opacity: 0;
 }
 .ToolbarModeItem[data-state=on] {
-  background: rgba(56, 126, 247, 0.1);
+  background: rgba(61, 220, 132, 0.12);
 }
 .ToolbarModeItem[data-state=on] svg {
   color: #3ddc84;
@@ -1722,7 +1722,7 @@ body.driver-active .OnboardingArrow {
   align-items: center;
   position: relative;
   overflow: hidden;
-  background-color: rgba(56, 126, 247, 0.1);
+  background-color: rgba(61, 220, 132, 0.12);
   margin-left: -16px;
   margin-top: -16px;
   margin-bottom: 8px;
@@ -1765,7 +1765,7 @@ body.driver-active .OnboardingArrow {
 }
 
 .permission-button {
-  background: rgba(48, 128, 248, 0.1);
+  background: rgba(61, 220, 132, 0.12);
   border-radius: 30px;
   color: #3ddc84;
   display: flex;
@@ -1784,7 +1784,7 @@ body.driver-active .OnboardingArrow {
   margin-bottom: 4px !important;
 }
 .permission-button:hover {
-  background: rgba(48, 128, 248, 0.15);
+  background: rgba(61, 220, 132, 0.18);
   cursor: pointer;
 }
 .permission-button svg {
@@ -2146,7 +2146,7 @@ body.driver-active .OnboardingArrow {
 .welcome-feature-icon {
   width: 20px;
   height: 20px;
-  background: rgba(48, 128, 248, 0.1);
+  background: rgba(61, 220, 132, 0.12);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -4012,11 +4012,11 @@ button {
 }
 
 .Button.blue {
-  background-color: rgba(48, 128, 248, 0.1);
+  background-color: rgba(61, 220, 132, 0.12);
   color: #3ddc84;
 }
 .Button.blue:hover {
-  background-color: rgba(48, 128, 248, 0.15);
+  background-color: rgba(61, 220, 132, 0.18);
   cursor: pointer;
 }
 .Button.blue:focus {

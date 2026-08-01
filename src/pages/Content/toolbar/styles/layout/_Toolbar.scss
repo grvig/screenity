@@ -386,7 +386,7 @@ iframe.screenity-iframe {
     opacity: 0;
   }
   &[data-state="on"] {
-    background: rgba(56, 126, 247, 0.1);
+    background: $color-primary-transparent;
 
     svg {
       color: $color-primary;

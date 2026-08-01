@@ -67,7 +67,7 @@ body {
 
   &.secondaryButton {
     color: $color-text-primary;
-    background-color: #fff;
+    background-color: $color-light-grey;
     border: 1px solid $color-border;
     height: 40px;
     svg {
@@ -211,7 +211,7 @@ button {
 }
 
 .AlertDialogContent {
-  background-color: white;
+  background-color: $color-light-grey;
   border-radius: 30px;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
     hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
@@ -265,11 +265,11 @@ button {
   height: 35px;
 }
 .Button.blue {
-  background-color: rgba(48, 128, 248, 0.1);
+  background-color: $color-primary-transparent;
   color: $color-primary;
 
   &:hover {
-    background-color: rgba(48, 128, 248, 0.15);
+    background-color: rgba(61, 220, 132, 0.18);
     cursor: pointer;
   }
   &:focus {

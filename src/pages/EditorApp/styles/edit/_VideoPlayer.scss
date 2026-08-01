@@ -1,6 +1,7 @@
 @use "../global/variables.scss" as *;
 :root {
-  --plyr-color-main: #3080f8;
+  // Interpolated: Sass emits custom-property values verbatim otherwise.
+  --plyr-color-main: #{$color-primary};
   --plyr-font-family: "Satoshi-Medium", sans-serif;
 }
 

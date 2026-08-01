@@ -3,7 +3,7 @@
 .panel {
   height: 100%;
   width: 460px;
-  background-color: #fff;
+  background-color: $color-background;
   border: 1px solid $color-border;
   box-sizing: border-box;
   overflow-y: auto;
@@ -58,7 +58,7 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  background-color: rgba(56, 126, 247, 0.1);
+  background-color: $color-primary-transparent;
   box-sizing: border-box;
 
   .buttonRight {
@@ -208,7 +208,7 @@
   padding-bottom: 20px;
 
   svg {
-    color: #6e7684;
+    color: $color-text-secondary;
   }
 
   .uploadTitle {
@@ -239,7 +239,7 @@
     padding-left: 14px;
     padding-right: 8px;
     svg {
-      color: #6e7684;
+      color: $color-text-secondary;
     }
   }
   .audioDetailsMiddle {
@@ -266,7 +266,7 @@
     position: absolute;
     height: 100%;
     svg {
-      color: #6e7684;
+      color: $color-text-secondary;
     }
 
     &:hover {
@@ -306,7 +306,7 @@
   display: block;
   width: 16px;
   height: 16px;
-  background-color: #fff;
+  background-color: $color-text-primary;
   box-sizing: border-box;
   border: 2px solid $color-primary;
   border-radius: 10px;
