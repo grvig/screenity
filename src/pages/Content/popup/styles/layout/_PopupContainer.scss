@@ -261,7 +261,7 @@
   right: 0px;
   margin: auto;
   bottom: -40px;
-  background: #edeef2;
+  background: $color-light-grey;
   border-radius: $container-border-radius;
   padding: 4px 12px;
   text-align: center;
@@ -279,6 +279,6 @@
 
   &:hover {
     cursor: pointer;
-    background: #fefeff;
+    background: $color-background;
   }
 }

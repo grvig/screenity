@@ -148,7 +148,7 @@ input {
   height: 100%;
   width: calc(100% - 10px);
   margin-left: 5px;
-  background: #edeef3;
+  background: $color-light-grey;
   z-index: -2;
   left: 0px;
   border-radius: $container-border-radius;
@@ -386,7 +386,7 @@ input {
 .projectActiveBannerDivider {
   width: 1px;
   height: 24px;
-  background-color: #44444d; /* subtle divider color */
+  background-color: $color-border;
 }
 
 .projectActiveBannerClose {

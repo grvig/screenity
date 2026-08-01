@@ -78,10 +78,10 @@
   border-radius: 50%;
   background: radial-gradient(
     118.3% 119.01% at 35.44% 0%,
-    #2baef8 23.13%,
-    #3582f6 46.35%,
-    #486def 74.48%,
-    #7b9aea 100%
+    #4EE595 23.13%,
+    #3DDC84 46.35%,
+    #2BB76B 74.48%,
+    #1F8F53 100%
   );
   width: 200px;
   height: 200px;
@@ -104,16 +104,16 @@
 .c2 {
   background: radial-gradient(
     118.3% 119.01% at 35.44% 0%,
-    #2b96f8 23.13%,
-    #356bf6 64.58%
+    #4EE595 23.13%,
+    #2BB76B 64.58%
   );
   transform: translate(20px, 20px);
 }
 .c3 {
   background: radial-gradient(
     118.3% 119.01% at 35.44% 0%,
-    #4884ca 15.3%,
-    #2b89f8 78.83%
+    #2BB76B 15.3%,
+    #4EE595 78.83%
   );
   transform: translate(-30px, -40px);
 }
@@ -130,7 +130,7 @@
   bottom: 0px;
   margin: auto;
   transition: cubic-bezier(0.82, 0.1, 0.24, 0.99) 1.5s;
-  background: #cbe8f7;
+  background: $color-primary-transparent;
   z-index: -1;
 }
 .recording-countdown {

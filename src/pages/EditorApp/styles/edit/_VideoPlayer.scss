@@ -38,7 +38,7 @@
 }
 /* Customize progress bar color */
 .plyr__progress--played {
-  background-color: #ff5733 !important; /* Your custom color */
+  background-color: $color-primary !important;
 }
 
 // Max width 900px

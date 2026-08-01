@@ -815,7 +815,7 @@ button {
 .ToastEscButton {
   font-family: $font-medium;
   color: $color-text-contrast;
-  background-color: #51515F;
+  background-color: $color-light-grey;
   border: none;
   border-radius: $container-border-radius;
   padding: 0 12px;
@@ -828,5 +828,5 @@ button {
   transition: background-color 120ms ease;
 }
 .ToastEscButton:hover {
-  background-color: #6B6B79;
+  background-color: $color-text-secondary;
 }

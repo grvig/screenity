@@ -48,12 +48,12 @@
   .button {
     background: radial-gradient(
         118.3% 119.01% at 35.44% 0%,
-        #2baef8 23.13%,
-        #3582f6 46.35%,
-        #486def 74.48%,
-        #7b9aea 100%
+        #4EE595 23.13%,
+        #3DDC84 46.35%,
+        #2BB76B 74.48%,
+        #1F8F53 100%
       ),
-      #1b58f6;
+      $color-primary;
     color: $color-text-contrast;
     text-align: center;
     padding: 8px 16px;
