@@ -24,18 +24,26 @@
   "chrome-extension://__MSG_@@extension_id__/assets/fonts/GloriaHallelujah-Regular"
 );
 
-/* Colors */
-$color-background: #fff;
-$color-light-grey: #f6f7fb;
-$color-primary: #3080f8;
-$color-border: #e8e8e8;
-$color-text-contrast: #fff;
-$color-text-primary: #29292f;
-$color-text-secondary: #6e7684;
-$color-red: #d2234d;
-$color-red-light: #faf0f4;
-$color-primary-transparent: rgba(48, 128, 248, 0.1);
-$color-icon: #9797a4;
+/* Colors
+ *
+ * Dark theme with green as the accent. Names are kept from the old light
+ * palette so every existing usage re-themes without a rename; only the values
+ * changed. Two that read oddly now but are correct:
+ *   $color-light-grey    - subtle/hover surface, so it sits *above* the base
+ *   $color-text-contrast - text drawn on the accent, so it is near-black
+ * All pairs verified at WCAG AA or better against both surfaces.
+ */
+$color-background: #121417;
+$color-light-grey: #1c1f24;
+$color-primary: #3ddc84;
+$color-border: #2a2e35;
+$color-text-contrast: #0b1f14;
+$color-text-primary: #e8eaed;
+$color-text-secondary: #9aa0a6;
+$color-red: #ff6b81;
+$color-red-light: rgba(255, 107, 129, 0.12);
+$color-primary-transparent: rgba(61, 220, 132, 0.12);
+$color-icon: #8a9099;
 
 /* Font */
 //$font-size-normal: 0.875rem;
@@ -75,16 +83,16 @@ $container-soft-shadow: 0 4px 20px rgb(38 38 52 / 8%);
 /* Gradients */
 $gradient-primary: radial-gradient(
   117.41% 117.78% at 35.44% 0%,
-  #2baef8 23.13%,
-  #3582f6 46.35%,
-  #486def 74.48%,
-  #7b9aea 100%
+  #4ee595 23.13%,
+  #3ddc84 46.35%,
+  #2bb76b 74.48%,
+  #1f8f53 100%
 );
-$gradient-shadow-primary: drop-shadow(0px 4px 20px rgba(86, 123, 218, 0.5));
+$gradient-shadow-primary: drop-shadow(0px 4px 20px rgba(61, 220, 132, 0.35));
 
 /* Events */
-$focus-border: 0px 0px 0px 2px rgba(48, 128, 248, 0.5);
-$focus-inner-border: inset 0px 0px 0px 2px rgba(48, 128, 248, 0.5);
+$focus-border: 0px 0px 0px 2px rgba(61, 220, 132, 0.5);
+$focus-inner-border: inset 0px 0px 0px 2px rgba(61, 220, 132, 0.5);
 
 /* Z-index */
 $z-index-max: 99999999999;
