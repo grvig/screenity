@@ -107,7 +107,7 @@ const Setup = () => {
 					margin: 0;
 	padding: 0;
 	min-height: 100%;
-		background-color: #F6F7FB!important;
+		background-color: #1c1f24!important;
 				}
 
 				.setupInfo {
@@ -115,7 +115,7 @@ const Setup = () => {
 				}
 				a {
 					text-decoration: none!important;
-					color: #4C7DE2;
+					color: #3ddc84;
 				}
 
 
@@ -151,7 +151,7 @@ const Setup = () => {
 					align-items: center;
 					width: 60%;
 					height: fit-content;
-					background-color: #fff;
+					background-color: #121417;
 					border-radius: 30px;
 					padding: 50px 50px;
 					gap: 80px;
@@ -188,7 +188,7 @@ const Setup = () => {
 					font-size: 20px;
 					font-weight: bold;
 					margin-bottom: 10px;
-					color: #29292F;
+					color: #e8eaed;
 					font-family: 'Satoshi-Bold', sans-serif!important;
 					letter-spacing: -0.5px;
 				}
@@ -199,7 +199,7 @@ const Setup = () => {
 					justify-content: center;
 					align-items: left;
 					margin-top: 10px;
-					color: #6E7684;
+					color: #9aa0a6;
 					font-size: 14px;
 				}
 
@@ -221,7 +221,7 @@ const Setup = () => {
 					vertical-align: middle;
 					margin-left: 3px;
 					margin-right: 3px;
-					background-color: #F4F2F2;
+					background-color: #1c1f24;
 				}
 
 				.setupStep img {

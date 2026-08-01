@@ -123,8 +123,8 @@ const Warning = ({ alwaysInteractive = false }) => {
           }
 
 				.warning-root {
-					background-color: #29292F;
-					color: #FFF;
+					background-color: #1c1f24;
+					color: #e8eaed;
 					border-radius: 30px;
 					box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
 						hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
@@ -194,21 +194,21 @@ const Warning = ({ alwaysInteractive = false }) => {
 				}
 				
 				.warning-title {
-					color: #FFF;
+					color: #e8eaed;
 					font-family: "Satoshi-Medium", sans-serif;
 				}
 				
 				.warning-description {
-					color: #FFF;
+					color: #e8eaed;
 					opacity: 0.8;
 					font-family: "Satoshi-Medium", sans-serif;
 				}
 				
 				.ToastAction {
-					color: #FFF;
+					color: #e8eaed;
 					font-family: "Satoshi-Medium", sans-serif;
 					text-align: right;
-					background-color: #51515f;
+					background-color: #2a2e35;
 					padding: 0px 12px !important;
 					height: 24px !important;
 					cursor: pointer;

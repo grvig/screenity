@@ -282,14 +282,14 @@ const EditorApp = () => {
 				}
 				.button-stop {
 					padding: 10px 20px;
-					background: #FFF;
+					background: #121417;
 					border-radius: 30px;
-					color: #29292F;
+					color: #e8eaed;
 					font-size: 14px;
 					font-weight: 500;
 					cursor: pointer;
 					margin-top: 0px;
-					border: 1px solid #E8E8E8;
+					border: 1px solid #2a2e35;
 					margin-left: auto;
 					margin-right: auto;
 					z-index: 999999;
@@ -309,7 +309,7 @@ const EditorApp = () => {
 					left: 0;
 					width: 100%;
 					height: 100%;
-					background-color: #F6F7FB;
+					background-color: #1c1f24;
 					isolation: isolate;
 				}
 					.middle-area {
@@ -327,7 +327,7 @@ const EditorApp = () => {
 					.title {
 						font-size: 24px;
 						font-weight: 700;
-						color: #1A1A1A;
+						color: #e8eaed;
 						margin-bottom: 14px;
 						font-family: Satoshi-Medium, sans-serif;
 						text-align: center;
@@ -335,7 +335,7 @@ const EditorApp = () => {
 					.subtitle {
 						font-size: 14px;
 						font-weight: 400;
-						color: #6E7684;
+						color: #9aa0a6;
 						margin-bottom: 24px;
 						font-family: Satoshi-Medium, sans-serif;
 						text-align: center;
@@ -360,12 +360,12 @@ const EditorApp = () => {
   display:none;
 }
 .screenity-scrollbar *:hover::-webkit-scrollbar-thumb, .screenity-scrollbar:hover::-webkit-scrollbar-thumb {
-  background-color: #a0a0a5;
+  background-color: #8a9099;
   border:4px solid #fff;
 }
 ::-webkit-scrollbar-thumb *:hover, ::-webkit-scrollbar-thumb:hover {
-    background-color:#a0a0a5;
-    border:4px solid #f4f4f4
+    background-color:#8a9099;
+    border:4px solid #121417
 }
 .videoBanner {
 	height: 40px!important;
@@ -373,8 +373,8 @@ const EditorApp = () => {
 	position: absolute!important;
 	top: 0px!important;
 	left: 0px!important;
-	background-color: #3080F8!important;
-	color: #FFF!important;
+	background-color: #3ddc84!important;
+	color: #e8eaed!important;
 	font-family: "Satoshi-Medium"!important;
 	z-index: 99999999999!important;
 	text-align: center!important;
