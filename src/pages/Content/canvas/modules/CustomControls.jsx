@@ -12,21 +12,21 @@ import {
 const CustomControls = (canvas) => {
   fabric.Object.prototype.set({
     transparentCorners: false,
-    borderColor: "#0D99FF",
+    borderColor: "#3DDC84",
     cornerColor: "#FFF",
     borderScaleFactor: 2,
     cornerStyle: "circle",
-    cornerStrokeColor: "#0D99FF",
+    cornerStrokeColor: "#3DDC84",
     borderOpacityWhenMoving: 1,
   });
 
   fabric.Textbox.prototype.set({
     transparentCorners: false,
-    borderColor: "#0D99FF",
+    borderColor: "#3DDC84",
     cornerColor: "#FFF",
     borderScaleFactor: 2,
     cornerStyle: "circle",
-    cornerStrokeColor: "#0D99FF",
+    cornerStrokeColor: "#3DDC84",
     borderOpacityWhenMoving: 1,
   });
 

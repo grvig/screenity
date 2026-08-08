@@ -61,7 +61,7 @@ const TextTool = (canvas, contentStateRef, setContentState, saveCanvas) => {
     });
 
     text.on("editing:entered", () => {
-      text.borderColor = "#0D99FF";
+      text.borderColor = "#3DDC84";
     });
 
     canvas.add(text);
