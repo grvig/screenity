@@ -48,7 +48,7 @@ const InactiveSubscription = ({
             className="welcome-description"
             style={{
               fontSize: "14px",
-              color: "#6E7684",
+              color: "#9aa0a6",
               lineHeight: "1.5",
               marginBottom: "20px",
             }}
@@ -66,10 +66,10 @@ const InactiveSubscription = ({
           {formattedDate && hasSubscribedBefore && (
             <div
               style={{
-                backgroundColor: "#FFF8FA",
+                backgroundColor: "rgba(255, 107, 129, 0.12)",
                 borderRadius: "30px",
                 padding: "1.25rem 1.5rem",
-                color: "#F0175B",
+                color: "#ff6b81",
                 fontSize: "14px",
                 fontWeight: 500,
                 lineHeight: "1.5",
@@ -92,9 +92,9 @@ const InactiveSubscription = ({
             className="welcome-cta"
             style={{
               marginBottom: "20px",
-              backgroundColor: "#29292F",
+              backgroundColor: "#3ddc84",
               boxSizing: "border-box",
-              color: "white",
+              color: "#0b1f14",
               height: "45px",
               width: "100%",
               borderRadius: "999px",
@@ -122,7 +122,7 @@ const InactiveSubscription = ({
             style={{
               marginBottom: "12px",
               fontSize: "14px",
-              color: "#6E7684",
+              color: "#9aa0a6",
               textAlign: "center",
             }}
           >
@@ -133,8 +133,8 @@ const InactiveSubscription = ({
           <div
             className="welcome-cta"
             style={{
-              backgroundColor: "white",
-              border: "1px solid #E5E7EB",
+              backgroundColor: "#1c1f24",
+              border: "1px solid #2a2e35",
               boxSizing: "border-box",
               height: "45px",
               width: "100%",
@@ -142,7 +142,7 @@ const InactiveSubscription = ({
               textAlign: "center",
               fontWeight: "600",
               cursor: "pointer",
-              color: "#141416",
+              color: "#e8eaed",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

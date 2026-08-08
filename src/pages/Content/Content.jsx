@@ -36,7 +36,7 @@ const Content = () => {
 			}
 			.screenity-shadow-dom .TooltipContent {
   border-radius: 30px!important;
-	background-color: #29292F!important;
+	background-color: #1c1f24!important;
   padding: 10px 15px!important;
   font-size: 12px;
 	margin-bottom: 10px!important;
@@ -130,7 +130,7 @@ const Content = () => {
   padding-bottom: 12px;
   border-radius: 15px;
   font-family: 'Satoshi-Medium', sans-serif;
-  color: #29292F;
+  color: #e8eaed;
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
     0px 10px 20px -15px rgba(22, 23, 24, 0.2);
   animation-duration: 400ms;
@@ -175,13 +175,13 @@ const Content = () => {
   outline: none;
 }
 .ScreenityDropdownMenuItem:hover {
-    background-color: #F6F7FB !important;
+    background-color: #1c1f24 !important;
     cursor: pointer;
 }
 .ScreenityDropdownMenuItem[data-disabled] {
-  color: #6E7684 !important;
+  color: #9aa0a6 !important;
   cursor: not-allowed;
-  background-color: #F6F7FB !important;
+  background-color: #1c1f24 !important;
 }
 
 `}</style>

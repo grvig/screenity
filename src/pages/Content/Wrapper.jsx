@@ -85,7 +85,7 @@ const RecordingLoader = () => {
             marginTop: 20,
             fontSize: 15,
             fontWeight: 500,
-            color: "#FFFFFF",
+            color: "#e8eaed",
             textAlign: "center",
             letterSpacing: "-0.01em",
           }}
@@ -418,7 +418,7 @@ const Wrapper = () => {
               textTransform: "none",
               textIndent: "0",
               textAlign: "left",
-              color: "#29292F",
+              color: "#e8eaed",
               direction: "ltr",
               whiteSpace: "normal",
               fontStyle: "normal",
