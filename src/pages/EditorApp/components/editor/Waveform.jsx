@@ -31,8 +31,10 @@ const WaveformGenerator = (props) => {
     try {
       wavesurferRef.current = WaveSurfer.create({
         container: waveformContainerRef.current,
-        waveColor: "#C4C5CE",
-        progressColor: "#9596A2",
+        // Dark theme: dim the unplayed waveform and use the green accent for
+        // the played portion. wavesurfer takes literals, not the SCSS tokens.
+        waveColor: "#3a3f47",
+        progressColor: "#3ddc84",
         interpolation: "cubic",
         height: "auto",
         cursorWidth: 0,
