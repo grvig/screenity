@@ -53,7 +53,7 @@ const Waveform = () => {
           count = 0;
         }
       }
-      canvasContext.strokeStyle = "#78C072";
+      canvasContext.strokeStyle = "#3ddc84";
       canvasContext.stroke();
 
       animationFrameId = requestAnimationFrame(startVisualization);
@@ -77,7 +77,7 @@ const Waveform = () => {
         }
         x += sliceWidth;
       }
-      canvasContext.strokeStyle = "#78C072";
+      canvasContext.strokeStyle = "#3ddc84";
       canvasContext.lineWidth = 1.5;
       canvasContext.stroke();
 
@@ -125,7 +125,7 @@ const Waveform = () => {
       ref={canvasRef}
       width="324"
       height="30"
-      style={{ background: "#f5f6fa" }}
+      style={{ background: "#1c1f24" }}
     />
   );
 };
