@@ -270,7 +270,7 @@ const Camera = () => {
           style={{
             width: "100%",
             height: "100%",
-            backgroundColor: "#CBD0D8",
+            backgroundColor: "#1c1f24",
             zIndex: 999,
             position: "absolute",
             top: 0,
